@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import edu.edina.library.vision.DetectPolePipeline;
 
 @TeleOp
-@Disabled
+//@Disabled
 public class FindPoleDemo extends LinearOpMode
 {
     OpenCvCamera camera;
@@ -89,9 +89,10 @@ public class FindPoleDemo extends LinearOpMode
 
         while (opModeIsActive())
         {
+            idle();
             sleep(20);
         }
 
-        FtcDashboard.getInstance().startCameraStream(camera, 30);
+        FtcDashboard.getInstance().stopCameraStream();
     }
 }
