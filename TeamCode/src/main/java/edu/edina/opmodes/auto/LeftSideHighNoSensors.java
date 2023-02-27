@@ -237,7 +237,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                     clawServo.setPosition(robotState.CLAWMIDDLEPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Middle;
                 })
-                .addTemporalMarker(.2, () -> {
+                .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION2);
                 })
                 .addTemporalMarker(2.1, () -> {
@@ -272,7 +272,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                     clawServo.setPosition(robotState.CLAWMIDDLEPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Middle;
                 })
-                .addTemporalMarker(.2, () -> {
+                .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION1);
                 })
                 .addTemporalMarker(2.1, () -> {

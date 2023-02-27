@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveOdo;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveTwoWheelOdo;
 
 /**
  * This is a simple teleop routine for testing localization. Drive the robot around like a normal
@@ -16,10 +16,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveOdo;
  */
 @TeleOp(group = "drive")
 //@Disabled
-public class LocalizationTestOdo extends LinearOpMode {
+public class LocalizationTestTwoWheelOdo extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        SampleMecanumDriveOdo drive = new SampleMecanumDriveOdo(hardwareMap);
+        SampleMecanumDriveTwoWheelOdo drive = new SampleMecanumDriveTwoWheelOdo(hardwareMap);
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
