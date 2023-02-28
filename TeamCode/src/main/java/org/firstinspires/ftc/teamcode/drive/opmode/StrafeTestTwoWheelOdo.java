@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveThreeWheelOdo;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveTwoWheelOdo;
 
 /*
  * This is a simple routine to test translational drive capabilities.
@@ -17,14 +18,14 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveThreeWheelOdo;
 @Config
 @Autonomous(group = "drive")
 //@Disabled
-public class StrafeTestOdo extends LinearOpMode {
+public class StrafeTestTwoWheelOdo extends LinearOpMode {
     public static double DISTANCE = 60; // in
 
     @Override
     public void runOpMode() throws InterruptedException {
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        SampleMecanumDriveThreeWheelOdo drive = new SampleMecanumDriveThreeWheelOdo(hardwareMap);
+        SampleMecanumDriveTwoWheelOdo drive = new SampleMecanumDriveTwoWheelOdo(hardwareMap);
 
         Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
                 .strafeRight(DISTANCE)
