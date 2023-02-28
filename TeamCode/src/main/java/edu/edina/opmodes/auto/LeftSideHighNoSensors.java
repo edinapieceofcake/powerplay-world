@@ -116,7 +116,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                     liftMotor.setTargetPosition(robotState.POLEPOSITIONLOW);
                 })
                 .addTemporalMarker(1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONLOW);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
                 .addTemporalMarker(2, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
