@@ -122,7 +122,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                 } )
-                .strafeTo(new Vector2d(-30, -22))
+                .strafeTo(new Vector2d(-31, -22))
                 .build();
 
         // cone two pickup
