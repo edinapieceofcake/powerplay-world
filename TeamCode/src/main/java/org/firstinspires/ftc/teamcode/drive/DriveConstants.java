@@ -44,9 +44,9 @@ public class DriveConstants {
     //        15.777284943696856);
     //getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
     // 11.754450473072957
-    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(25, 0, 5,
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
 //            14.480479361359741);
-            16.3);
+            0);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
