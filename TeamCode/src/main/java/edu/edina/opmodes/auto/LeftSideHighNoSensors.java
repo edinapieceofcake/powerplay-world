@@ -129,8 +129,6 @@ public class LeftSideHighNoSensors extends LinearOpMode {
         TrajectorySequence backToPickup1 = drive.trajectorySequenceBuilder(start.end())
                 .strafeLeft(13)
                 .strafeTo(new Vector2d(-56, -17.5))
-//                .strafeRight(4)
-//                .back(26)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -348,16 +346,16 @@ public class LeftSideHighNoSensors extends LinearOpMode {
             ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
 
             // If there's been a new frame...
+            telemetry.addData("Make sure claw is in the front and high camera is facing field.", "");
+            telemetry.addData("Cone should always be on side with medium pole", "");
+            telemetry.addData("If the distance number is huge, turn the power off and on. Wait five seconds before turning back on after turning off.", "");
+
+            telemetry.addData("FPS", camera.getFps());
+            telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
+            telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
+
             if(detections != null)
             {
-                telemetry.addData("Make sure claw is in the front and high camera is facing field.", "");
-                telemetry.addData("Cone should always be on side with medium pole", "");
-                telemetry.addData("If the distance number is huge, turn the power off and on. Wait five seconds before turning back on after turning off.", "");
-
-                telemetry.addData("FPS", camera.getFps());
-                telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
-                telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
-
                 // If we don't see any tags
                 if(detections.size() == 0)
                 {
@@ -388,9 +386,9 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
                     }
                 }
-
-                telemetry.update();
             }
+
+            telemetry.update();
 
             sleep(20);
         }
