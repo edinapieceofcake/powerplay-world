@@ -128,8 +128,9 @@ public class LeftSideHighNoSensors extends LinearOpMode {
         // cone two pickup
         TrajectorySequence backToPickup1 = drive.trajectorySequenceBuilder(start.end())
                 .strafeLeft(13)
-                .strafeRight(4)
-                .back(26)
+                .strafeTo(new Vector2d(-57, -13))
+//                .strafeRight(4)
+//                .back(26)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
