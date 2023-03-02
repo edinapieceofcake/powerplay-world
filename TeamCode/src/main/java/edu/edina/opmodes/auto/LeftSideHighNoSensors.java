@@ -403,8 +403,8 @@ public class LeftSideHighNoSensors extends LinearOpMode {
         });
 
         if (opModeIsActive()) {
-            this.resetRuntime();
             liftMotor.setPower(1);
+
             drive.followTrajectorySequence(start);
 
             drive.followTrajectorySequence(backToPickup1);
