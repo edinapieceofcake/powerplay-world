@@ -26,11 +26,9 @@ public class RobotState {
     public double ARMBACKPOSITION = 0.83;
     public double ARMSIDEPOSITION = 0.5;
 
-    public static double SLICERBACKINTOPOLEPOSITION = .8;
-    public static double SLICERFORWARDINTOPOLEPOSITION = .78;
-    public static double SLICERSTORAGEPOSITION = .32;
-    public static double SLICERDROPFORWARDINTOPOLEPOSITION = 1;
-    public static double SLICERTELEOPSTORAGEPOSITION = .2;
+    public double CLAWCENTERTILT = 0.5;
+    public double CLAWLEFTTILT = 0.73;
+    public double CLAWRIGHTTILT = 0.35;
 
     public int CONESTACKPOSITION5 = -155;
     public int CONESTACKPOSITION4 = -115;

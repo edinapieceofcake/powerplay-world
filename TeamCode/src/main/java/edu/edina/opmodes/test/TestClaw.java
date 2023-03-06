@@ -12,9 +12,10 @@ import edu.edina.library.util.Stickygamepad;
 
 @TeleOp
 @Disabled
-public class TestSlicer extends LinearOpMode {
+public class TestClaw extends LinearOpMode {
     private Servo clawServo;
     private Servo armServo;
+    private Servo clawTiltServo;
     private DcMotorEx liftMotor;
 
     @Override
@@ -24,6 +25,7 @@ public class TestSlicer extends LinearOpMode {
 
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         armServo = hardwareMap.get(Servo.class, "armServo");
+        clawTiltServo = hardwareMap.get(Servo.class, "clawTiltServo");
         liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
 
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -33,10 +35,11 @@ public class TestSlicer extends LinearOpMode {
         // set the digital channel to input.
         armServo.setPosition(robotState.ARMFRONTPOSITION);
         clawServo.setPosition(robotState.CLAWOPENPOSITION);
+        clawTiltServo.setPosition(.5);
 
         waitForStart();
 
-        liftMotor.setPower(.5);
+        //liftMotor.setPower(.5);
         while (opModeIsActive()) {
             pad1.update();
 
@@ -63,31 +66,24 @@ public class TestSlicer extends LinearOpMode {
             if (pad1.y) {
                 // slicer in front
                 clawServo.setPosition(robotState.CLAWOPENPOSITION);
-                sleep(100);
             }
 
             if (pad1.x) {
                 // slicer in back requiring more rotation
-                clawServo.setPosition(robotState.CLAWOPENPOSITION);
-                sleep(100);
-            }
-
-            if (pad1.left_bumper) {
-            }
-
-            if (pad1.right_bumper) {
-            }
-
-            if (gamepad1.left_trigger != 0) {
                 clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
             }
 
-            if (gamepad1.right_trigger != 0) {
-                clawServo.setPosition(robotState.CLAWOPENPOSITION);
+            if (pad1.left_bumper) {
+                clawTiltServo.setPosition(clawTiltServo.getPosition() - .01);
+            }
+
+            if (pad1.right_bumper) {
+                clawTiltServo.setPosition(clawTiltServo.getPosition() + .01);
             }
 
             telemetry.addData("Claw Servo", clawServo.getPosition());
             telemetry.addData("Arm Servo", armServo.getPosition());
+            telemetry.addData("Claw Tilt Servo", clawTiltServo.getPosition());
             telemetry.addData("Lift Location", liftMotor.getCurrentPosition());
 
             telemetry.update();
