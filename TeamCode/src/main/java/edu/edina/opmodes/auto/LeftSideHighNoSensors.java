@@ -145,7 +145,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                 .addTemporalMarker(.7, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION5);
                 })
-                .addTemporalMarker(3.0, () -> {
+                .addTemporalMarker(2.9, () -> {
                     clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Closed;
                 })
@@ -225,7 +225,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
 
         // cone four drop off
         TrajectorySequence backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
-                .strafeTo(new Vector2d(-18, -15.5))
+                .strafeTo(new Vector2d(-18, -14.5))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -261,7 +261,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
 
         // cone five drop off
         TrajectorySequence backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(-18, -15.5))
+                .strafeTo(new Vector2d(-18, -14.5))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -298,7 +298,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
 
         // cone six drop off
         TrajectorySequence backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(-18, -15.5))
+                .strafeTo(new Vector2d(-18, -14.5))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -337,7 +337,7 @@ public class LeftSideHighNoSensors extends LinearOpMode {
                 .addTemporalMarker(0.4, () -> {
                     liftMotor.setTargetPosition(0);
                 })
-                .back(34)
+                .back(37)
                 .build();
 
         TrajectorySequence backToPickup6_middle = drive.trajectorySequenceBuilder(backToDropOff5.end())
