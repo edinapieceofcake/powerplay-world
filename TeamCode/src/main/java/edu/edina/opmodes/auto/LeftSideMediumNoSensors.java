@@ -101,13 +101,16 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
         liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+
+        // wait for the claw to center before we close during init
+        sleep(500);
+
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
 
         armServo.setPosition(robotState.ARMBACKPOSITION);
         robotState.ArmServoPosition = ArmServoPosition.Back;
-
-        clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(new Pose2d(-33, -65, Math.toRadians(-180)));
