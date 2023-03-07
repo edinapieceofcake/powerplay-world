@@ -118,13 +118,13 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
                     liftMotor.setTargetPosition(robotState.POLEPOSITIONLOW);
                 })
                 .addTemporalMarker(1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 10);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                     clawTiltServo.setPosition(robotState.CLAWRIGHTTILT);
                 })
                 .addTemporalMarker(2.3, () -> {
-                    clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
+                    clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 } )
                 .strafeTo(new Vector2d(-31.5, -22))
                 .build();
@@ -150,7 +150,7 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
         TrajectorySequence backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
                 .strafeTo(new Vector2d(-20, -15))
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 15);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 5);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -186,7 +186,7 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
         TrajectorySequence backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
                 .strafeTo(new Vector2d(-20, -15))
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 15);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 5);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -222,7 +222,7 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
         TrajectorySequence backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
                 .strafeTo(new Vector2d(-20, -15))
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 15);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 5);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -256,9 +256,9 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
 
         // cone five drop off
         TrajectorySequence backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(-18, -15))
+                .strafeTo(new Vector2d(-20, -15))
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 10);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -292,9 +292,9 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
 
         // cone six drop off
         TrajectorySequence backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(-18, -15))
+                .strafeTo(new Vector2d(-20, -15))
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM + 5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM - 5);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -364,12 +364,6 @@ public class LeftSideMediumNoSensors extends LinearOpMode {
             telemetry.addData("FPS", camera.getFps());
             telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
             telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
-
-            telemetry.addData("start", start.duration());
-            telemetry.addData("backToPickup1", backToPickup1.duration());
-            telemetry.addData("backToDropOff1", backToDropOff1.duration());
-            telemetry.addData("backToPickup2", backToPickup2.duration());
-            telemetry.addData("backToDropOff2", backToDropOff2.duration());
 
             if(detections != null)
             {
