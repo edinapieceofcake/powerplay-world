@@ -20,6 +20,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
     private RobotState robotState;
     private Servo armServo;
     private Servo clawServo;
+    private Servo clawTiltServo;
     private DigitalChannel liftSwitch;
     private boolean runningToPosition;
     private boolean atZeroPosition;
@@ -34,6 +35,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             armServo = map.get(Servo.class, "armServo");
             clawServo = map.get(Servo.class, "clawServo");
             liftSwitch = map.get(DigitalChannel.class, "liftSwitch");
+            clawTiltServo = map.get(Servo.class, "clawTiltServo");
 
             // set the digital channel to input.
             liftSwitch.setMode(DigitalChannel.Mode.INPUT);
@@ -53,6 +55,8 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
 
             robotState.TargetPoleLocation = PoleLocation.None;
             robotState.LiftSuccessfullySetup = true;
+
+            clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
         } catch (Exception ex) {
             robotState.LiftSuccessfullySetup = false;
         }
