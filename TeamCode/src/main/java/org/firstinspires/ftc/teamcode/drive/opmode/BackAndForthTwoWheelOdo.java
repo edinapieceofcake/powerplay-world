@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveTwoWheelOdo;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+//@Disabled
 public class BackAndForthTwoWheelOdo extends LinearOpMode {
 
     public static double DISTANCE = 50;

@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDriveThreeWheelOdo;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+//@Disabled
 public class BackAndForthThreeWheelOdo extends LinearOpMode {
 
     public static double DISTANCE = 50;
