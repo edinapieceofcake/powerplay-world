@@ -176,7 +176,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             liftMotor.setPower(robotState.LiftDownSpeed);
         }
         else if (liftUp != 0) {
-            robotState.FutureTargetPosition += -30;
+            robotState.FutureTargetPosition += -15;
             liftMotor.setPower(robotState.LiftUpSpeed);
         }
 

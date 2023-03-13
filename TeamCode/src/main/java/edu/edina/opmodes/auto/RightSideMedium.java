@@ -67,6 +67,7 @@ public class RightSideMedium extends LinearOpMode {
     private RobotState robotState = new RobotState();
     private Servo armServo;
     private Servo clawServo;
+    private Servo clawTiltServo;
     private ColorSensor backColor;
     private DistanceSensor frontDistance;
 
@@ -103,6 +104,7 @@ public class RightSideMedium extends LinearOpMode {
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         backColor = hardwareMap.get(ColorSensor.class, "backColor");
         frontDistance = hardwareMap.get(DistanceSensor.class, "frontDistance");
+        clawTiltServo = hardwareMap.get(Servo.class, "clawTiltServo");
         final float[] hsvValues = new float[3];
 
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -111,6 +113,11 @@ public class RightSideMedium extends LinearOpMode {
         liftMotor.setTargetPosition(robotState.FutureTargetPosition);
         liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+
+        // wait for the claw to center before we close during init
+        sleep(500);
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;

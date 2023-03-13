@@ -3,7 +3,7 @@ package edu.edina.library.util;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class RobotState {
-    public DriveSpeed DriveSpeed = edu.edina.library.util.DriveSpeed.Medium;
+    public DriveSpeed DriveSpeed = edu.edina.library.util.DriveSpeed.Low;
 
     // lateral distance 9.3125
     // offset 2.56 towards the front
@@ -20,6 +20,13 @@ public class RobotState {
     public double CLAWOPENPOSITION = 0.56;
     public double CLAWMIDDLEPOSITION = 0.7;
     public double CLAWCLOSEDPOSITION = 0.83;
+
+    public double CLAWRIGHTPICKUPTILTPOSITION = 0.42;
+    public double CLAWLEFTPICKUPTILTPOSITION = 0.62;
+
+    public double CLAWRIGHTDROPOFFTILTPOSITION = 0.25;
+    public double CLAWLEFTDROPOFFTILTPOSITION = 0.85;
+
     public double CLAWOPENFORDROPOFF = .59;
     public int CLAWOPENPOSITION100 = 56;
     public double ARMFRONTPOSITION = 0.14;
@@ -39,7 +46,7 @@ public class RobotState {
     public int POLEPOSITIONLOW = -465;
     public int POLEPOSITIONMIDDLE = -805;
     public int POLEPOSITIONHIGH = -1110;
-    public int AUTOPOLEPOSITIONMEDIUM = -735;
+    public int AUTOPOLEPOSITIONMEDIUM = -740;
     public int AUTOPOLEPOSITIONHIGH = -1055;
 
     public int CLAWOPENWAITTIME = 250;

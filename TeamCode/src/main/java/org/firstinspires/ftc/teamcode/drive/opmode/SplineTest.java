@@ -18,13 +18,6 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 public class SplineTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        Servo leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        Servo rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        Servo centerServo = hardwareMap.get(Servo.class, "centerPodServo");
-        leftServo.setPosition(.5);
-        rightServo.setPosition(.5);
-        centerServo.setPosition(.5);
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         waitForStart();
