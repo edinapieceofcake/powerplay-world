@@ -14,17 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
  * This is an example of a more complex path to really test the tuning.
  */
 @Autonomous(group = "drive")
-//@Disabled
+@Disabled
 public class SplineTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        Servo leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        Servo rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        Servo centerServo = hardwareMap.get(Servo.class, "centerPodServo");
-        leftServo.setPosition(.5);
-        rightServo.setPosition(.5);
-        centerServo.setPosition(.5);
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         waitForStart();

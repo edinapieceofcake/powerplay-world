@@ -13,19 +13,12 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "drive")
-//@Disabled
+@Disabled
 public class TurnTest extends LinearOpMode {
     public static double ANGLE = 180; // deg
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Servo leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        Servo rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        Servo centerServo = hardwareMap.get(Servo.class, "centerPodServo");
-        leftServo.setPosition(.5);
-        rightServo.setPosition(.5);
-        centerServo.setPosition(.5);
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         waitForStart();

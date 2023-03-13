@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+import edu.edina.library.util.DriveSpeed;
 import edu.edina.library.util.PoseStorage;
 import edu.edina.library.util.RobotState;
 
@@ -17,7 +18,6 @@ public class MecanumDriveRR extends Subsystem{
     private double rightStickX;
     private SampleMecanumDrive drive;
     private RobotState robotState;
-    private boolean highSpeed;
 
     public MecanumDriveRR(HardwareMap map, RobotState robotState){
         try {
@@ -25,8 +25,8 @@ public class MecanumDriveRR extends Subsystem{
             drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             drive.setPoseEstimate(PoseStorage.currentPose);
             robotState.SpeedMultiplier = robotState.LowSpeedMultiplier;
+            robotState.DriveSpeed = DriveSpeed.Low;
             this.robotState = robotState;
-            this.highSpeed = false;
             robotState.DriveSuccessfullySetup = true;
         } catch (Exception ex) {
             robotState.DriveSuccessfullySetup = false;
@@ -53,11 +53,11 @@ public class MecanumDriveRR extends Subsystem{
 
     public void setDriveProperties(double leftStickX, double leftStickY, double rightStickX, boolean dPadDown){
         if (dPadDown) {
-            if (highSpeed) {
+            if (robotState.DriveSpeed == DriveSpeed.High) {
                 robotState.SpeedMultiplier = robotState.LowSpeedMultiplier;
-                highSpeed = false;
+                robotState.DriveSpeed = DriveSpeed.Low;
             } else {
-                highSpeed = true;
+                robotState.DriveSpeed = DriveSpeed.High;
                 robotState.SpeedMultiplier = robotState.HighSpeedMultiplier;
             }
         }

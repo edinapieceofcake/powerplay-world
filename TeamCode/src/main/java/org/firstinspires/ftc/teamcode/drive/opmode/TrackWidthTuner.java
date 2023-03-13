@@ -35,13 +35,6 @@ public class TrackWidthTuner extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Servo leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        Servo rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        Servo centerServo = hardwareMap.get(Servo.class, "centerPodServo");
-        leftServo.setPosition(.5);
-        rightServo.setPosition(.5);
-        centerServo.setPosition(.5);
-
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
