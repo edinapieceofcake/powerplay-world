@@ -62,8 +62,12 @@ public class MecanumDriveRR extends Subsystem{
             }
         }
 
-        this.leftStickX = leftStickX * robotState.SpeedMultiplier;
-        this.leftStickY = leftStickY * robotState.SpeedMultiplier;
-        this.rightStickX = rightStickX * robotState.SpeedMultiplier;
+        this.leftStickX = ScaleMotorCube(leftStickX) * robotState.SpeedMultiplier;
+        this.leftStickY = ScaleMotorCube(leftStickY) * robotState.SpeedMultiplier;
+        this.rightStickX = ScaleMotorCube(rightStickX) * robotState.SpeedMultiplier;
+    }
+
+    public static double ScaleMotorCube(double joyStickPosition) {
+        return (double) Math.pow(joyStickPosition, 3.0);
     }
 }

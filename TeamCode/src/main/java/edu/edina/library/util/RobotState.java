@@ -20,6 +20,13 @@ public class RobotState {
     public double CLAWOPENPOSITION = 0.56;
     public double CLAWMIDDLEPOSITION = 0.7;
     public double CLAWCLOSEDPOSITION = 0.83;
+
+    public double CLAWRIGHTPICKUPTILTPOSITION = 0.42;
+    public double CLAWLEFTPICKUPTILTPOSITION = 0.62;
+
+    public double CLAWRIGHTDROPOFFTILTPOSITION = 0..25;
+    public double CLAWLEFTDROPOFFTILTPOSITION = 0.85;
+
     public double CLAWOPENFORDROPOFF = .59;
     public int CLAWOPENPOSITION100 = 56;
     public double ARMFRONTPOSITION = 0.14;
