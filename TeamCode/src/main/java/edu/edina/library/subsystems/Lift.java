@@ -41,10 +41,10 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             liftSwitch.setMode(DigitalChannel.Mode.INPUT);
 
             liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            liftMotor.setTargetPosition(robotState.FutureTargetPosition);
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             liftMotor.setPower(robotState.LiftUpSpeed);
             robotState.FutureTargetPosition = 0;
-            liftMotor.setTargetPosition(robotState.FutureTargetPosition);
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             clawServo.setPosition(robotState.CLAWOPENPOSITION);
