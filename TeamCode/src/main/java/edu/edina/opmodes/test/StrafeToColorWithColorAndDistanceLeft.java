@@ -3,6 +3,7 @@ package edu.edina.opmodes.test;
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * This is an example of a more complex path to really test the tuning.
  */
 @Autonomous(group = "drive")
-//@Disabled
+@Disabled
 public class StrafeToColorWithColorAndDistanceLeft extends LinearOpMode {
     DcMotorEx leftFront;
     DcMotorEx leftRear;

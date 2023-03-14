@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import edu.edina.library.subsystems.Lift;
-import edu.edina.library.subsystems.MecanumDriveRR;
+import edu.edina.library.subsystems.MecanumDrive;
 import edu.edina.library.subsystems.Subsystem;
 import edu.edina.library.util.RobotState;
 
@@ -21,7 +21,7 @@ public class MultiThreadRobot {
     private List<Subsystem> subsystems;
 
     private Telemetry telemetry;
-    public MecanumDriveRR driveRR;
+    public MecanumDrive driveRR;
     public Lift lift;
     public RobotState robotState = new RobotState();
 
@@ -50,7 +50,7 @@ public class MultiThreadRobot {
         subsystems = new ArrayList<>();
 
         try {
-            driveRR = new MecanumDriveRR(opMode.hardwareMap, robotState);
+            driveRR = new MecanumDrive(opMode.hardwareMap, robotState);
             subsystems.add(driveRR);
         } catch (IllegalArgumentException e) {
 
