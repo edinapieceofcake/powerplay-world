@@ -18,7 +18,12 @@ import edu.edina.library.util.Stickygamepad;
 
 public class Claw extends edu.edina.library.subsystems.Subsystem {
     private Stickygamepad _gamepad2;
+    private Servo clawRotationServo;
 
+    public Claw(HardwareMap map, RobotState robotState) {
+        clawRotationServo = map.get(Servo.class, "clawRotationServo");
+
+    }
 
     @Override
     public void update() {

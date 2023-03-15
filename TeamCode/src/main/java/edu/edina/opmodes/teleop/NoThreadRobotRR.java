@@ -4,15 +4,20 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import edu.edina.library.subsystems.Claw;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.edina.library.subsystems.Claw;
 import edu.edina.library.subsystems.Lift;
 import edu.edina.library.subsystems.MecanumDriveRR;
 import edu.edina.library.subsystems.Subsystem;
+import edu.edina.library.util.ClawRotation;
 import edu.edina.library.util.RobotState;
 
 public class NoThreadRobotRR {
+    private Claw Claw;
     private List<Subsystem> subsystems;
     private Telemetry telemetry;
     public MecanumDriveRR driveRR;
@@ -36,6 +41,9 @@ public class NoThreadRobotRR {
 
         lift = new Lift(opMode.hardwareMap, robotState);
         subsystems.add(lift);
+
+        Claw = new Claw(opMode.hardwareMap, robotState);
+        subsystems.add(Claw);
     }
 
 

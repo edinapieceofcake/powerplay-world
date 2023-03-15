@@ -12,6 +12,7 @@ public class RobotState {
     public ClawServoPosition ClawServoPosition = edu.edina.library.util.ClawServoPosition.Closed;
     public ArmServoPosition ArmServoPosition = edu.edina.library.util.ArmServoPosition.Front;
     public PoleLocation TargetPoleLocation = edu.edina.library.util.PoleLocation.None;
+    public ClawRotation ClawRotation = edu.edina.library.util.ClawRotation.Center;
     public double ClawPosition = 0.0;
     public double ArmPosition = 0.0;
     public boolean LiftSwitch = false;

@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import edu.edina.library.util.Stickygamepad;
+import robot.Claw;
 
 @TeleOp(name = "DriveMeRR", group = "teleop")
 public class NoThreadTeleopRR extends OpMode {
@@ -43,6 +44,11 @@ public class NoThreadTeleopRR extends OpMode {
                 gamepad1.right_stick_x, _gamepad1.dpad_down);
 
         robot.lift.setLiftProperties(gamepad1.left_trigger, gamepad1.right_trigger,
+                _gamepad1.dpad_left, _gamepad1.dpad_up, _gamepad1.dpad_right,
+                _gamepad1.left_bumper, _gamepad1.right_bumper,
+                _gamepad1.x, _gamepad1.y, _gamepad1.b, _gamepad1.a);
+
+        Claw.setClawProperties(gamepad1.left_trigger, gamepad1.right_trigger,
                 _gamepad1.dpad_left, _gamepad1.dpad_up, _gamepad1.dpad_right,
                 _gamepad1.left_bumper, _gamepad1.right_bumper,
                 _gamepad1.x, _gamepad1.y, _gamepad1.b, _gamepad1.a);
