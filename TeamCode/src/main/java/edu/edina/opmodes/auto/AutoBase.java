@@ -94,7 +94,7 @@ public class AutoBase extends LinearOpMode {
     protected TrajectorySequence backToPickup6_middle;
     protected TrajectorySequence backToPickup6_right;
 
-    protected int detectionId = 6;
+    protected int detectionId = 3;
 
     protected boolean shouldClawBeInTheFront() {
         return true;
@@ -149,6 +149,7 @@ public class AutoBase extends LinearOpMode {
 
     protected void addAdditionalTelemetry(Telemetry telemetry) {}
 
+    protected Pose2d getStartPose() { return null; }
     protected void setDetectionId() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, getCameraName()), cameraMonitorViewId);
@@ -215,15 +216,22 @@ public class AutoBase extends LinearOpMode {
             sleep(20);
         }
 
+        camera.stopStreaming();
+
         camera.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
             public void onClose() {
-                camera.stopStreaming();
+
             }
         });
     }
 
     protected void runPaths() {
+
+        drive.setPoseEstimate(getStartPose());
+
         drive.followTrajectorySequence(start);
+
+        drive.followTrajectorySequence(backToPickup1);
 
         drive.followTrajectorySequence(backToDropOff1);
 
@@ -264,6 +272,7 @@ public class AutoBase extends LinearOpMode {
         setDetectionId();
         
         if (opModeIsActive()) {
+            liftMotor.setPower(1);
 
             runPaths();
 

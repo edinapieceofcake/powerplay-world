@@ -102,7 +102,7 @@ public class RightSideMedium extends AutoBase {
                 .strafeRight(5).build();
 */
         // cone two dropoff
-        backToDropOff1 = drive.trajectorySequenceBuilder(new Pose2d(60, -8, Math.toRadians(-180)))
+        backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
                 .resetConstraints()
                 .strafeTo(new Vector2d(25, -12))
                 .addTemporalMarker(.1, () -> {
