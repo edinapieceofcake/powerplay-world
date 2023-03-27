@@ -49,11 +49,12 @@ public class LeftSideMedium extends AutoBase {
     protected Pose2d getStartPose() {
         return new Pose2d(-33, -65, Math.toRadians(-180));
     }
+
     @Override
     protected void initPaths() {
 
         // cone one drop off
-        start = drive.trajectorySequenceBuilder(new Pose2d(-33, -65, Math.toRadians(-180)))
+        start = drive.trajectorySequenceBuilder(getStartPose())
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.POLEPOSITIONLOW);
                 })

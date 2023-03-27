@@ -216,8 +216,6 @@ public class AutoBase extends LinearOpMode {
             sleep(20);
         }
 
-        camera.stopStreaming();
-
         camera.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
             public void onClose() {
 
