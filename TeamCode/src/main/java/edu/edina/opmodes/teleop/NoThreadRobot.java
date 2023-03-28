@@ -16,8 +16,8 @@ import edu.edina.library.subsystems.Subsystem;
 import edu.edina.library.util.ClawRotation;
 import edu.edina.library.util.RobotState;
 
-public class NoThreadRobotRR {
-    private Claw Claw;
+public class NoThreadRobot {
+    public Claw claw;
     private List<Subsystem> subsystems;
     private Telemetry telemetry;
     public MecanumDrive driveRR;
@@ -42,8 +42,8 @@ public class NoThreadRobotRR {
         lift = new Lift(opMode.hardwareMap, robotState);
         subsystems.add(lift);
 
-        Claw = new Claw(opMode.hardwareMap, robotState);
-        subsystems.add(Claw);
+        claw = new Claw(opMode.hardwareMap, robotState);
+        subsystems.add(claw);
     }
 
 
