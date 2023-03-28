@@ -90,7 +90,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone two dropoff
         backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
-                .strafeTo(new Vector2d(-20, -11))
+                .strafeTo(new Vector2d(-19, -11))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -126,7 +126,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone three dropoff
         backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
-                .strafeTo(new Vector2d(-20, -11))
+                .strafeTo(new Vector2d(-19, -11))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
@@ -162,7 +162,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone four drop off
         backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
-                .strafeTo(new Vector2d(-20, -11))
+                .strafeTo(new Vector2d(-19, -11))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
@@ -198,7 +198,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone five drop off
         backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(-20, -12))
+                .strafeTo(new Vector2d(-19, -12))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
@@ -235,7 +235,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone six drop off
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(-20, -12))
+                .strafeTo(new Vector2d(-19, -12))
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
