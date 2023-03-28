@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
@@ -52,14 +53,8 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 
 @Config
 public class AutoBase extends LinearOpMode {
-
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
-
-    double dropTime = .5;
-    double pickupTime = .5;
-
-    static final double FEET_PER_METER = 3.28084;
 
     double fx = 578.272;
     double fy = 578.272;
@@ -99,7 +94,7 @@ public class AutoBase extends LinearOpMode {
     protected TrajectorySequence backToPickup6_middle;
     protected TrajectorySequence backToPickup6_right;
 
-    protected int detectionId = 6;
+    protected int detectionId = 9;
 
     protected boolean shouldClawBeInTheFront() {
         return true;
@@ -144,9 +139,18 @@ public class AutoBase extends LinearOpMode {
             armServo.setPosition(robotState.ARMBACKPOSITION);
             robotState.ArmServoPosition = ArmServoPosition.Back;
         }
+
+        drive = new SampleMecanumDrive(hardwareMap);
     }
 
-    protected void initCamera() {
+    protected void initPaths() {
+        assert false;
+    }
+
+    protected void addAdditionalTelemetry(Telemetry telemetry) {}
+
+    protected Pose2d getStartPose() { return null; }
+    protected void setDetectionId() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, getCameraName()), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -164,63 +168,54 @@ public class AutoBase extends LinearOpMode {
 
             }
         });
-    }
 
-    protected void initPaths() {
-        assert false;
-    }
+        while (!isStarted() && !isStopRequested()) {
+            // Calling getDetectionsUpdate() will only return an object if there was a new frame
+            // processed since the last time we called it. Otherwise, it will return null. This
+            // enables us to only run logic when there has been a new frame, as opposed to the
+            // getLatestDetections() method which will always return an object.
+            ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
 
-    protected void setDetectionId() {
+            // If there's been a new frame...
+            if (detections != null) {
+                addAdditionalTelemetry(telemetry);
 
-        // Calling getDetectionsUpdate() will only return an object if there was a new frame
-        // processed since the last time we called it. Otherwise, it will return null. This
-        // enables us to only run logic when there has been a new frame, as opposed to the
-        // getLatestDetections() method which will always return an object.
-        ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
+                telemetry.addData("FPS", camera.getFps());
+                telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
+                telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
 
-        // If there's been a new frame...
-        if (detections != null) {
-            telemetry.addData("Make sure claw is in the front and high camera is facing field.", "");
-            telemetry.addData("Cone should always be on side with medium pole", "");
-            telemetry.addData("If the distance number is huge, turn the power off and on. Wait five seconds before turning back on after turning off.", "");
+                // If we don't see any tags
+                if (detections.size() == 0) {
+                    numFramesWithoutDetection++;
 
-            telemetry.addData("FPS", camera.getFps());
-            telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
-            telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
-
-            // If we don't see any tags
-            if (detections.size() == 0) {
-                numFramesWithoutDetection++;
-
-                // If we haven't seen a tag for a few frames, lower the decimation
-                // so we can hopefully pick one up if we're e.g. far back
-                if (numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION) {
-                    aprilTagDetectionPipeline.setDecimation(DECIMATION_LOW);
+                    // If we haven't seen a tag for a few frames, lower the decimation
+                    // so we can hopefully pick one up if we're e.g. far back
+                    if (numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION) {
+                        aprilTagDetectionPipeline.setDecimation(DECIMATION_LOW);
+                    }
                 }
-            }
-            // We do see tags!
-            else {
-                numFramesWithoutDetection = 0;
+                // We do see tags!
+                else {
+                    numFramesWithoutDetection = 0;
 
-                // If the target is within 1 meter, turn on high decimation to
-                // increase the frame rate
-                if (detections.get(0).pose.z < THRESHOLD_HIGH_DECIMATION_RANGE_METERS) {
-                    aprilTagDetectionPipeline.setDecimation(DECIMATION_HIGH);
+                    // If the target is within 1 meter, turn on high decimation to
+                    // increase the frame rate
+                    if (detections.get(0).pose.z < THRESHOLD_HIGH_DECIMATION_RANGE_METERS) {
+                        aprilTagDetectionPipeline.setDecimation(DECIMATION_HIGH);
+                    }
+
+                    for (AprilTagDetection detection : detections) {
+                        detectionId = detection.id;
+                        telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
+                    }
                 }
 
-                for (AprilTagDetection detection : detections) {
-                    detectionId = detection.id;
-                    telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-                }
+                telemetry.update();
             }
 
-            telemetry.update();
+            sleep(20);
         }
 
-        sleep(20);
-    }
-
-    protected void closeCamera() {
         camera.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
             public void onClose() {
 
@@ -229,7 +224,12 @@ public class AutoBase extends LinearOpMode {
     }
 
     protected void runPaths() {
+
+        drive.setPoseEstimate(getStartPose());
+
         drive.followTrajectorySequence(start);
+
+        drive.followTrajectorySequence(backToPickup1);
 
         drive.followTrajectorySequence(backToDropOff1);
 
@@ -265,17 +265,12 @@ public class AutoBase extends LinearOpMode {
 
         initHardware();
 
-        initCamera();
-
         initPaths();
 
-        while (!isStarted() && !isStopRequested()) {
-            setDetectionId();
-        }
-
-        closeCamera();
-
+        setDetectionId();
+        
         if (opModeIsActive()) {
+            liftMotor.setPower(1);
 
             runPaths();
 
