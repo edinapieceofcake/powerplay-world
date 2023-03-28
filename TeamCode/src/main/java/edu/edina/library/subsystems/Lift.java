@@ -20,6 +20,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
     private RobotState robotState;
     private Servo armServo;
     private Servo clawServo;
+    private Servo clawTiltServo;
     private DigitalChannel liftSwitch;
     private boolean runningToPosition;
     private boolean atZeroPosition;
@@ -34,15 +35,16 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             armServo = map.get(Servo.class, "armServo");
             clawServo = map.get(Servo.class, "clawServo");
             liftSwitch = map.get(DigitalChannel.class, "liftSwitch");
+            clawTiltServo = map.get(Servo.class, "clawTiltServo");
 
             // set the digital channel to input.
             liftSwitch.setMode(DigitalChannel.Mode.INPUT);
 
             liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            liftMotor.setTargetPosition(robotState.FutureTargetPosition);
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             liftMotor.setPower(robotState.LiftUpSpeed);
             robotState.FutureTargetPosition = 0;
-            liftMotor.setTargetPosition(robotState.FutureTargetPosition);
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             clawServo.setPosition(robotState.CLAWOPENPOSITION);
@@ -53,6 +55,8 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
 
             robotState.TargetPoleLocation = PoleLocation.None;
             robotState.LiftSuccessfullySetup = true;
+
+            clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
         } catch (Exception ex) {
             robotState.LiftSuccessfullySetup = false;
         }
@@ -172,7 +176,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             liftMotor.setPower(robotState.LiftDownSpeed);
         }
         else if (liftUp != 0) {
-            robotState.FutureTargetPosition += -30;
+            robotState.FutureTargetPosition += -15;
             liftMotor.setPower(robotState.LiftUpSpeed);
         }
 

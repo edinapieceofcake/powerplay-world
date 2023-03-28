@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import edu.edina.library.util.Stickygamepad;
 import robot.Claw;
 
-@TeleOp(name = "DriveMeRR", group = "teleop")
-public class NoThreadTeleopRR extends OpMode {
-    private NoThreadRobotRR robot;
+@TeleOp(name = "DriveMe", group = "teleop")
+public class NoThreadTeleop extends OpMode {
+    private NoThreadRobot robot;
     private Stickygamepad _gamepad1;
     private Stickygamepad _gamepad2;
 
@@ -18,7 +18,7 @@ public class NoThreadTeleopRR extends OpMode {
         _gamepad1 = new Stickygamepad(gamepad1);
         _gamepad2 = new Stickygamepad(gamepad2);
 
-        robot = new NoThreadRobotRR(this, telemetry);
+        robot = new NoThreadRobot(this, telemetry);
 
         Servo leftServo = hardwareMap.get(Servo.class, "leftPodServo");
         Servo rightServo = hardwareMap.get(Servo.class, "rightPodServo");

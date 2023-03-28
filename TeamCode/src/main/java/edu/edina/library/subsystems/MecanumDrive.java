@@ -1,32 +1,30 @@
 package edu.edina.library.subsystems;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+import edu.edina.library.util.DriveSpeed;
 import edu.edina.library.util.PoseStorage;
 import edu.edina.library.util.RobotState;
 
-public class MecanumDriveRR extends Subsystem{
+public class MecanumDrive extends Subsystem{
     private double leftStickX;
     private double leftStickY;
     private double rightStickX;
     private SampleMecanumDrive drive;
     private RobotState robotState;
-    private boolean highSpeed;
 
-    public MecanumDriveRR(HardwareMap map, RobotState robotState){
+    public MecanumDrive(HardwareMap map, RobotState robotState){
         try {
             drive = new SampleMecanumDrive(map);
             drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             drive.setPoseEstimate(PoseStorage.currentPose);
             robotState.SpeedMultiplier = robotState.LowSpeedMultiplier;
+            robotState.DriveSpeed = DriveSpeed.Low;
             this.robotState = robotState;
-            this.highSpeed = false;
             robotState.DriveSuccessfullySetup = true;
         } catch (Exception ex) {
             robotState.DriveSuccessfullySetup = false;
@@ -53,17 +51,21 @@ public class MecanumDriveRR extends Subsystem{
 
     public void setDriveProperties(double leftStickX, double leftStickY, double rightStickX, boolean dPadDown){
         if (dPadDown) {
-            if (highSpeed) {
+            if (robotState.DriveSpeed == DriveSpeed.High) {
                 robotState.SpeedMultiplier = robotState.LowSpeedMultiplier;
-                highSpeed = false;
+                robotState.DriveSpeed = DriveSpeed.Low;
             } else {
-                highSpeed = true;
+                robotState.DriveSpeed = DriveSpeed.High;
                 robotState.SpeedMultiplier = robotState.HighSpeedMultiplier;
             }
         }
 
-        this.leftStickX = leftStickX * robotState.SpeedMultiplier;
-        this.leftStickY = leftStickY * robotState.SpeedMultiplier;
-        this.rightStickX = rightStickX * robotState.SpeedMultiplier;
+        this.leftStickX = ScaleMotorCube(leftStickX) * robotState.SpeedMultiplier;
+        this.leftStickY = ScaleMotorCube(leftStickY) * robotState.SpeedMultiplier;
+        this.rightStickX = ScaleMotorCube(rightStickX) * robotState.SpeedMultiplier;
+    }
+
+    public static double ScaleMotorCube(double joyStickPosition) {
+        return (double) Math.pow(joyStickPosition, 3.0);
     }
 }
