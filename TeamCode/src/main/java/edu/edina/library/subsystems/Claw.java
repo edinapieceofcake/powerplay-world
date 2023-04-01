@@ -45,30 +45,30 @@ public class Claw extends edu.edina.library.subsystems.Subsystem {
 
     public void setClawProperties(boolean bumper_left, boolean bumper_right){
         if (bumper_left){
-            if (ClawRotation.LeftPickup == clawRotation){
-                clawRotation = ClawRotation.LeftDropoff;
+            if (ClawRotation.RightPickup == clawRotation){
+                clawRotation = ClawRotation.RightDropoff;
             }
             else if (ClawRotation.Center == clawRotation){
-                clawRotation = ClawRotation.LeftPickup;
-            }
-            else if (ClawRotation.RightDropoff == clawRotation){
-                clawRotation = ClawRotation.Center;
-            }
-            else if (ClawRotation.RightPickup == clawRotation){
-                clawRotation = ClawRotation.Center;
-            }
-        }
-        else if (bumper_right){
-            if (ClawRotation.Center == clawRotation){
                 clawRotation = ClawRotation.RightPickup;
-            }
-            else if (ClawRotation.RightPickup == clawRotation){
-                clawRotation = ClawRotation.RightDropoff;
             }
             else if (ClawRotation.LeftDropoff == clawRotation){
                 clawRotation = ClawRotation.Center;
             }
             else if (ClawRotation.LeftPickup == clawRotation){
+                clawRotation = ClawRotation.Center;
+            }
+        }
+        else if (bumper_right){
+            if (ClawRotation.Center == clawRotation){
+                clawRotation = ClawRotation.LeftPickup;
+            }
+            else if (ClawRotation.LeftPickup == clawRotation){
+                clawRotation = ClawRotation.LeftDropoff;
+            }
+            else if (ClawRotation.RightDropoff == clawRotation){
+                clawRotation = ClawRotation.Center;
+            }
+            else if (ClawRotation.RightPickup == clawRotation){
                 clawRotation = ClawRotation.Center;
             }
         }
