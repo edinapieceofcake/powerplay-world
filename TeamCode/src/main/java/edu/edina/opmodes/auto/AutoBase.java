@@ -2,6 +2,7 @@ package edu.edina.opmodes.auto;
 
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -79,6 +80,12 @@ public class AutoBase extends LinearOpMode {
     protected Servo clawServo;
     protected Servo clawTiltServo;
 
+    protected DcMotorEx leftFront;
+    protected DcMotorEx leftRear;
+    protected DcMotorEx rightRear;
+    protected DcMotorEx rightFront;
+    protected DistanceSensor distanceSensor;
+
     protected TrajectorySequence start;
     protected TrajectorySequence backToPickup1;
     protected TrajectorySequence backToPickup2;
@@ -114,9 +121,16 @@ public class AutoBase extends LinearOpMode {
         centerServo.setPosition(robotState.SERVODOWNPOSITION);
 
         liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+
         armServo = hardwareMap.get(Servo.class, "armServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         clawTiltServo = hardwareMap.get(Servo.class, "clawTiltServo");
+
+        distanceSensor = hardwareMap.get(Rev2mDistanceSensor.class, "frontDistance");
 
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robotState.FutureTargetPosition = 0;
@@ -180,6 +194,7 @@ public class AutoBase extends LinearOpMode {
             if (detections != null) {
                 addAdditionalTelemetry(telemetry);
 
+                telemetry.addData("Distance", distanceSensor.getDistance(DistanceUnit.MM));
                 telemetry.addData("FPS", camera.getFps());
                 telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
                 telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
@@ -223,8 +238,57 @@ public class AutoBase extends LinearOpMode {
         });
     }
 
-    protected void runPaths() {
+    protected void checkToMoveBackwards() {
+        double distance = distanceSensor.getDistance(DistanceUnit.MM);
+        double difference = distance - 35;
 
+        if (difference > 0) {
+            double travelDistance = difference / 301.0 * 384.5;
+            long futurePosition = leftFront.getCurrentPosition() - (long)travelDistance;
+            long futureTime = System.currentTimeMillis() + 500;
+
+            leftFront.setPower(-.1);
+            leftRear.setPower(-.1);
+            rightRear.setPower(-.1);
+            rightFront.setPower(-.1);
+
+            while (opModeIsActive() && (leftFront.getCurrentPosition() > futurePosition) && (System.currentTimeMillis() < futureTime)) {
+                idle();
+            }
+
+            leftFront.setPower(0);
+            leftRear.setPower(0);
+            rightRear.setPower(0);
+            rightFront.setPower(0);
+        }
+    }
+
+    protected void checkToMoveForward() {
+        double distance = distanceSensor.getDistance(DistanceUnit.MM);
+        double difference = distance - 35;
+
+        if (difference > 0) {
+            double travelDistance = difference / 301.0 * 384.5;
+            long futurePosition = leftFront.getCurrentPosition() + (long)travelDistance;
+            long futureTime = System.currentTimeMillis() + 500;
+
+            leftFront.setPower(.1);
+            leftRear.setPower(.1);
+            rightRear.setPower(.1);
+            rightFront.setPower(.1);
+
+            while (opModeIsActive() && (leftFront.getCurrentPosition() < futurePosition) && (System.currentTimeMillis() < futureTime)) {
+                idle();
+            }
+
+            leftFront.setPower(0);
+            leftRear.setPower(0);
+            rightRear.setPower(0);
+            rightFront.setPower(0);
+        }
+    }
+
+    protected void runPaths() {
         drive.setPoseEstimate(getStartPose());
 
         drive.followTrajectorySequence(start);
