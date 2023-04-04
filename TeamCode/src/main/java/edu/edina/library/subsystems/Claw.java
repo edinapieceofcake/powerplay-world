@@ -43,7 +43,7 @@ public class Claw extends edu.edina.library.subsystems.Subsystem {
         }
     }
 
-    public void setClawProperties(boolean bumper_left, boolean bumper_right){
+    public void setClawProperties(boolean bumper_left, boolean bumper_right, float right_trigger, float left_trigger){
         if (bumper_left){
             if (ClawRotation.RightPickup == clawRotation){
                 clawRotation = ClawRotation.RightDropoff;
@@ -71,6 +71,12 @@ public class Claw extends edu.edina.library.subsystems.Subsystem {
             else if (ClawRotation.RightPickup == clawRotation){
                 clawRotation = ClawRotation.Center;
             }
+        }
+        else if (right_trigger == 1){
+            clawRotation = ClawRotation.Center;
+        }
+        else if (left_trigger == 1){
+            clawRotation = ClawRotation.Center;
         }
     }
 

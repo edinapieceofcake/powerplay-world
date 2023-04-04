@@ -50,7 +50,7 @@ public class NoThreadTeleop extends OpMode {
         robot.claw.setClawProperties(_gamepad2.dpad_left, _gamepad2.dpad_up, _gamepad2.dpad_right,
                 _gamepad2.x, _gamepad2.y, _gamepad2.b);
 
-        robot.claw.setClawProperties(_gamepad2.left_bumper, _gamepad2.right_bumper);
+        robot.claw.setClawProperties(_gamepad2.left_bumper, _gamepad2.right_bumper, gamepad2.right_trigger, gamepad2.left_trigger);
 
         robot.update();
 
