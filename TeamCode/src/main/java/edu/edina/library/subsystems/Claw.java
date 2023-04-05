@@ -1,103 +1,93 @@
 package edu.edina.library.subsystems;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.VoltageSensor;
+import com.qualcomm.robotcore.robot.Robot;
 
-import java.sql.Time;
-
-import edu.edina.library.util.ClawServoPosition;
-import edu.edina.library.util.ArmServoPosition;
-import edu.edina.library.util.PoleLocation;
 import edu.edina.library.util.RobotState;
 import edu.edina.library.util.ClawRotation;
-import edu.edina.library.util.Stickygamepad;
 
 public class Claw extends edu.edina.library.subsystems.Subsystem {
-    private ClawRotation clawRotation;
-    private Servo clawRotationServo;
+    private Servo clawTiltServo;
     private RobotState robotState;
 
     public Claw(HardwareMap map, RobotState robotState) {
-        clawRotationServo = map.get(Servo.class, "clawRotationServo");
+        clawTiltServo = map.get(Servo.class, "clawTiltServo");
         this.robotState = robotState;
-        clawRotation = ClawRotation.Center;
+        robotState.ClawRotation = ClawRotation.Center;
     }
 
     public void setClawProperties(boolean dpad_left, boolean dpad_up, boolean dpad_right,boolean x, boolean y, boolean b) {
         if (dpad_left) {
-            clawRotation = ClawRotation.LeftDropoff;
+            robotState.ClawRotation = ClawRotation.LeftDropoff;
         } else if(dpad_up){
-            clawRotation = ClawRotation.Center;
+            robotState.ClawRotation = ClawRotation.Center;
         } else if(dpad_right){
-            clawRotation = ClawRotation.RightDropoff;
+            robotState.ClawRotation = ClawRotation.RightDropoff;
         } else if (x){
-            clawRotation = ClawRotation.LeftPickup;
+            robotState.ClawRotation = ClawRotation.LeftPickup;
         } else if (y){
-            clawRotation = ClawRotation.Center;
+            robotState.ClawRotation = ClawRotation.Center;
         } else if (b){
-            clawRotation = ClawRotation.RightPickup;
+            robotState.ClawRotation = ClawRotation.RightPickup;
         }
     }
 
     public void setClawProperties(boolean bumper_left, boolean bumper_right, float right_trigger, float left_trigger){
         if (bumper_left){
-            if (ClawRotation.RightPickup == clawRotation){
-                clawRotation = ClawRotation.RightDropoff;
+            if (ClawRotation.RightPickup == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.RightDropoff;
             }
-            else if (ClawRotation.Center == clawRotation){
-                clawRotation = ClawRotation.RightPickup;
+            else if (ClawRotation.Center == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.RightPickup;
             }
-            else if (ClawRotation.LeftDropoff == clawRotation){
-                clawRotation = ClawRotation.Center;
+            else if (ClawRotation.LeftDropoff == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.Center;
             }
-            else if (ClawRotation.LeftPickup == clawRotation){
-                clawRotation = ClawRotation.Center;
+            else if (ClawRotation.LeftPickup == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.Center;
             }
         }
         else if (bumper_right){
-            if (ClawRotation.Center == clawRotation){
-                clawRotation = ClawRotation.LeftPickup;
+            if (ClawRotation.Center == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.LeftPickup;
             }
-            else if (ClawRotation.LeftPickup == clawRotation){
-                clawRotation = ClawRotation.LeftDropoff;
+            else if (ClawRotation.LeftPickup == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.LeftDropoff;
             }
-            else if (ClawRotation.RightDropoff == clawRotation){
-                clawRotation = ClawRotation.Center;
+            else if (ClawRotation.RightDropoff == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.Center;
             }
-            else if (ClawRotation.RightPickup == clawRotation){
-                clawRotation = ClawRotation.Center;
+            else if (ClawRotation.RightPickup == robotState.ClawRotation){
+                robotState.ClawRotation = ClawRotation.Center;
             }
         }
         else if (right_trigger == 1){
-            clawRotation = ClawRotation.Center;
+            robotState.ClawRotation = ClawRotation.Center;
         }
         else if (left_trigger == 1){
-            clawRotation = ClawRotation.Center;
+            robotState.ClawRotation = ClawRotation.Center;
         }
     }
 
 
     @Override
     public void update() {
-        switch (clawRotation){
+        switch (robotState.ClawRotation){
             case Center:
-                clawRotationServo.setPosition(robotState.CLAWCENTERTILT);
+                clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 break;
             case RightPickup:
-                clawRotationServo.setPosition(robotState.CLAWRIGHTPICKUPTILTPOSITION);
+                clawTiltServo.setPosition(robotState.CLAWRIGHTPICKUPTILTPOSITION);
                 break;
             case LeftPickup:
-                clawRotationServo.setPosition(robotState.CLAWLEFTPICKUPTILTPOSITION);
+                        clawTiltServo.setPosition(robotState.CLAWLEFTPICKUPTILTPOSITION);
                 break;
             case RightDropoff:
-                clawRotationServo.setPosition(robotState.CLAWRIGHTDROPOFFTILTPOSITION);
+                clawTiltServo.setPosition(robotState.CLAWRIGHTDROPOFFTILTPOSITION);
                 break;
             case LeftDropoff:
-                clawRotationServo.setPosition(robotState.CLAWLEFTDROPOFFTILTPOSITION);
+                clawTiltServo.setPosition(robotState.CLAWLEFTDROPOFFTILTPOSITION);
                 break;
         }
 
