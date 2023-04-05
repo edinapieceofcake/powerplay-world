@@ -82,10 +82,6 @@ public class LeftSideHigh extends AutoBase {
                 .addTemporalMarker(.7, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION5);
                 })
-                .addTemporalMarker(2.9, () -> {
-                    clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
-                    robotState.ClawServoPosition = ClawServoPosition.Closed;
-                })
                 .build();
 
         // cone two dropoff
@@ -117,10 +113,6 @@ public class LeftSideHigh extends AutoBase {
                 })
                 .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION4);
-                })
-                .addTemporalMarker(2, () -> {
-                    clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
-                    robotState.ClawServoPosition = ClawServoPosition.Closed;
                 })
                 .build();
 
@@ -154,10 +146,6 @@ public class LeftSideHigh extends AutoBase {
                 .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION3);
                 })
-                .addTemporalMarker(2, () -> {
-                    clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
-                    robotState.ClawServoPosition = ClawServoPosition.Closed;
-                })
                 .build();
 
         // cone four drop off
@@ -189,10 +177,6 @@ public class LeftSideHigh extends AutoBase {
                 })
                 .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION2);
-                })
-                .addTemporalMarker(2.1, () -> {
-                    clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
-                    robotState.ClawServoPosition = ClawServoPosition.Closed;
                 })
                 .build();
 
@@ -226,10 +210,6 @@ public class LeftSideHigh extends AutoBase {
                 })
                 .addTemporalMarker(.3, () -> {
                     liftMotor.setTargetPosition(robotState.CONESTACKPOSITION1);
-                })
-                .addTemporalMarker(2.1, () -> {
-                    clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
-                    robotState.ClawServoPosition = ClawServoPosition.Closed;
                 })
                 .build();
 
@@ -304,5 +284,66 @@ public class LeftSideHigh extends AutoBase {
                 })
                 .forward(10)
                 .build();
+    }
+
+    @Override
+    protected void runPaths() {
+
+        drive.setPoseEstimate(getStartPose());
+
+        drive.followTrajectorySequence(start);
+
+        drive.followTrajectorySequence(backToPickup1);
+
+        checkToMoveBackwards();
+
+        clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Closed;
+        sleep(200);
+
+        drive.followTrajectorySequence(backToDropOff1);
+
+        drive.followTrajectorySequence(backToPickup2);
+
+        checkToMoveBackwards();
+
+        clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Closed;
+        sleep(200);
+
+        drive.followTrajectorySequence(backToDropOff2);
+
+        drive.followTrajectorySequence(backToPickup3);
+
+        checkToMoveBackwards();
+
+        sleep(100);
+        clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Closed;
+        sleep(200);
+
+        drive.followTrajectorySequence(backToDropOff3);
+
+        drive.followTrajectorySequence(backToPickup4);
+
+        checkToMoveBackwards();
+
+        sleep(100);
+        clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Closed;
+        sleep(200);
+
+        drive.followTrajectorySequence(backToDropOff4);
+
+        drive.followTrajectorySequence(backToPickup5);
+
+        checkToMoveBackwards();
+
+        sleep(100);
+        clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Closed;
+        sleep(200);
+
+        drive.followTrajectorySequence(backToDropOff5);
     }
 }
