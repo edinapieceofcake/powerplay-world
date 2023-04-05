@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import java.sql.Time;
 
+import edu.edina.library.util.ClawRotation;
 import edu.edina.library.util.ClawServoPosition;
 import edu.edina.library.util.ArmServoPosition;
 import edu.edina.library.util.PoleLocation;
@@ -57,6 +58,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             robotState.LiftSuccessfullySetup = true;
 
             clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+            robotState.ClawRotation = ClawRotation.Center;
         } catch (Exception ex) {
             robotState.LiftSuccessfullySetup = false;
         }
@@ -71,6 +73,8 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             if (robotState.TargetPoleLocation == PoleLocation.Return) {
                 if (!runningToPosition) {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
+                    clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+                    robotState.ClawRotation = ClawRotation.Center;
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawOpenStartedTime = System.currentTimeMillis();
                     runningToPosition = true;
