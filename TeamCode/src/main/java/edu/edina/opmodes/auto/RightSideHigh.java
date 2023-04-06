@@ -292,7 +292,7 @@ public class RightSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup1);
 
-        checkToMoveForward();
+        checkToMoveForward(500);
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
@@ -302,7 +302,7 @@ public class RightSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup2);
 
-        checkToMoveForward();
+        checkToMoveForward(500);
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
@@ -312,7 +312,7 @@ public class RightSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup3);
 
-        checkToMoveForward();
+        checkToMoveForward(500);
 
         sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
@@ -323,7 +323,7 @@ public class RightSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup4);
 
-        checkToMoveForward();
+        checkToMoveForward(500);
 
         sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
@@ -334,7 +334,7 @@ public class RightSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup5);
 
-        checkToMoveForward();
+        checkToMoveForward(500);
 
         sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
