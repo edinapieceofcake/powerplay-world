@@ -41,12 +41,6 @@ public class LeftSideHigh extends AutoBase {
     protected void addAdditionalTelemetry(Telemetry telemetry) {
         telemetry.addData("Make sure claw is in the front and high camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
-        telemetry.addData("Start", start.duration());
-        telemetry.addData("backToPickup1", backToPickup1.duration());
-        telemetry.addData("backToDropOff1", backToDropOff1.duration());
-        telemetry.addData("backToPickup2", backToPickup2.duration());
-        telemetry.addData("backToDropOff2", backToDropOff2.duration());
-        telemetry.addData("backToPickup3", backToPickup3.duration());
     }
 
     @Override
