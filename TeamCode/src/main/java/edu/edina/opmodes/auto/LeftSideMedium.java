@@ -284,7 +284,7 @@ public class LeftSideMedium extends AutoBase {
                         return accelerationConstant;
                     }
                 })
-                .strafeTo(new Vector2d(-18.5, -13))
+                .strafeTo(new Vector2d(-18.5, -13.5))
                 .addTemporalMarker(0.0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
