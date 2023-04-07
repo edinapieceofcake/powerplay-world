@@ -38,10 +38,10 @@ public class RobotState {
     public double CLAWLEFTTILT = 0.73;
     public double CLAWRIGHTTILT = 0.35;
 
-    public int CONESTACKPOSITION5 = -155;
-    public int CONESTACKPOSITION4 = -115;
-    public int CONESTACKPOSITION3 = -65;
-    public int CONESTACKPOSITION2 = -35;
+    public int CONESTACKPOSITION5 = -170;
+    public int CONESTACKPOSITION4 = -135;
+    public int CONESTACKPOSITION3 = -90;
+    public int CONESTACKPOSITION2 = -45;
     public int CONESTACKPOSITION1 = 0;
 
     public int POLEPOSITIONLOW = -465;

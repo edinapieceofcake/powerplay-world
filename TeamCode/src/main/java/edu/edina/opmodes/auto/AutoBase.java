@@ -79,7 +79,7 @@ public class AutoBase extends LinearOpMode {
     protected TrajectorySequence backToPickup6_middle;
     protected TrajectorySequence backToPickup6_right;
 
-    protected int detectionId = 3;
+    protected int detectionId = 9;
 
     protected boolean shouldClawBeInTheFront() {
         return true;
@@ -312,6 +312,8 @@ public class AutoBase extends LinearOpMode {
         setDetectionId();
         
         if (opModeIsActive()) {
+            resetRuntime();
+
             liftMotor.setPower(1);
 
             runPaths();
