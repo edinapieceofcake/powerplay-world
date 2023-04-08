@@ -38,16 +38,16 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class RightSideMedium extends AutoBase {
 
-    public static Vector2d D2 = new Vector2d(32, -21);
+    public static Vector2d D2 = new Vector2d(30.5, -21);
     public static Vector2d STACK_1 = new Vector2d(56, -9);
     public static Vector2d D2_1 = new Vector2d(18.5, -12);
-    public static Vector2d STACK_2 = new Vector2d(56, -10.5);
+    public static Vector2d STACK_2 = new Vector2d(56, -10);
     public static Vector2d D2_2 = new Vector2d(18.5, -13);
-    public static Vector2d STACK_3 = new Vector2d(56, -11);
+    public static Vector2d STACK_3 = new Vector2d(56, -10);
     public static Vector2d D2_3 = new Vector2d(18.5, -13.5);
-    public static Vector2d STACK_4 = new Vector2d(56, -11);
+    public static Vector2d STACK_4 = new Vector2d(56, -10.5);
     public static Vector2d D2_4 = new Vector2d(18.5, -14);
-    public static Vector2d STACK_5 = new Vector2d(56, -11.5);
+    public static Vector2d STACK_5 = new Vector2d(56, -10.5);
     public static Vector2d D2_5 = new Vector2d(18.5, -14.5);
 
     @Override
