@@ -34,16 +34,16 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 public class LeftSideMedium extends AutoBase {
 
     public static Vector2d D2 = new Vector2d(-32, -19);
-    public static Vector2d STACK_1 = new Vector2d(-57, -13);
-    public static Vector2d D2_1 = new Vector2d(-18.5, -12.5);
-    public static Vector2d STACK_2 = new Vector2d(-57, -13);
-    public static Vector2d D2_2 = new Vector2d(-18.5, -12.5);
-    public static Vector2d STACK_3 = new Vector2d(-57, -13);
-    public static Vector2d D2_3 = new Vector2d(-18.5, -12.5);
-    public static Vector2d STACK_4 = new Vector2d(-57, -13);
-    public static Vector2d D2_4 = new Vector2d(-18.5, -12.5);
-    public static Vector2d STACK_5 = new Vector2d(-57, -13);
-    public static Vector2d D2_5 = new Vector2d(-18.5, -12.5);
+    public static Vector2d STACK_1 = new Vector2d(-58.25, -13);
+    public static Vector2d D2_1 = new Vector2d(-20, -12);
+    public static Vector2d STACK_2 = new Vector2d(-58.5, -12.75);
+    public static Vector2d D2_2 = new Vector2d(-20, -12);
+    public static Vector2d STACK_3 = new Vector2d(-58.5, -12.75);
+    public static Vector2d D2_3 = new Vector2d(-20, -11.75);
+    public static Vector2d STACK_4 = new Vector2d(-58.5, -12.75);
+    public static Vector2d D2_4 = new Vector2d(-20, -11.75);
+    public static Vector2d STACK_5 = new Vector2d(-58.5, -12.75);
+    public static Vector2d D2_5 = new Vector2d(-20, -12.75);
 
     @Override
     protected String getCameraName() {
@@ -349,7 +349,7 @@ public class LeftSideMedium extends AutoBase {
         drive.followTrajectorySequence(backToDropOff1);
 
         drive.followTrajectorySequence(backToPickup2);
-/*
+
         //checkToMoveForward();
 
         drive.followTrajectorySequence(backToDropOff2);
@@ -372,5 +372,4 @@ public class LeftSideMedium extends AutoBase {
 
         drive.followTrajectorySequence(backToDropOff5);
 
- */
     }}

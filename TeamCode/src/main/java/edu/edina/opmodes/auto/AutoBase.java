@@ -338,7 +338,7 @@ public class AutoBase extends LinearOpMode {
 
             runPaths();
 
-            //runPark();
+            runPark();
         }
     }
 }
