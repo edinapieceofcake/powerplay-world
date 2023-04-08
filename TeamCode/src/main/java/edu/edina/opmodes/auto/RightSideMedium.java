@@ -38,6 +38,18 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class RightSideMedium extends AutoBase {
 
+    public static Vector2d D2 = new Vector2d(32, -21);
+    public static Vector2d STACK_1 = new Vector2d(56, -9);
+    public static Vector2d D2_1 = new Vector2d(18.5, -12);
+    public static Vector2d STACK_2 = new Vector2d(56, -10.5);
+    public static Vector2d D2_2 = new Vector2d(18.5, -13);
+    public static Vector2d STACK_3 = new Vector2d(56, -11);
+    public static Vector2d D2_3 = new Vector2d(18.5, -13.5);
+    public static Vector2d STACK_4 = new Vector2d(56, -11);
+    public static Vector2d D2_4 = new Vector2d(18.5, -14);
+    public static Vector2d STACK_5 = new Vector2d(56, -11.5);
+    public static Vector2d D2_5 = new Vector2d(18.5, -14.5);
+
     @Override
     protected String getCameraName() {
         return "lowCamera";
@@ -47,6 +59,10 @@ public class RightSideMedium extends AutoBase {
     protected void addAdditionalTelemetry(Telemetry telemetry) {
         telemetry.addData("Make sure claw is in the front and low camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
+        telemetry.addData("start", start.duration());
+        telemetry.addData("backToPickup1", backToPickup1.duration());
+        telemetry.addData("backToDropOff1", backToDropOff1.duration());
+        telemetry.addData("backToPickup2", backToPickup2.duration());
     }
 
     @Override
@@ -71,13 +87,13 @@ public class RightSideMedium extends AutoBase {
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 } )
-                .strafeTo(new Vector2d(31, -21))
+                .strafeTo(D2)
                 .build();
 
         // cone two pickup
         backToPickup1 = drive.trajectorySequenceBuilder(start.end())
                 .strafeRight(12)
-                .strafeTo(new Vector2d(53, -9))
+                .strafeTo(STACK_1)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -89,7 +105,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone two dropoff
         backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
-                .strafeTo(new Vector2d(18, -12))
+                .strafeTo(D2_1)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -98,7 +114,7 @@ public class RightSideMedium extends AutoBase {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Side;
                     } )
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(1.8, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
@@ -107,7 +123,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone three pickup
         backToPickup2 = drive.trajectorySequenceBuilder(backToDropOff1.end())
-                .strafeTo(new Vector2d(53, -9))
+                .strafeTo(STACK_2)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -121,7 +137,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone three dropoff
         backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
-                .strafeTo(new Vector2d(18, -12))
+                .strafeTo(D2_2)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -130,7 +146,7 @@ public class RightSideMedium extends AutoBase {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Side;
                 } )
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(1.8, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
@@ -139,7 +155,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone four pickup
         backToPickup3 = drive.trajectorySequenceBuilder(backToDropOff2.end())
-                .strafeTo(new Vector2d(53, -9))
+                .strafeTo(STACK_3)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -153,7 +169,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone four drop off
         backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
-                .strafeTo(new Vector2d(18, -12))
+                .strafeTo(D2_3)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -162,7 +178,7 @@ public class RightSideMedium extends AutoBase {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Side;
                 } )
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(1.8, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
@@ -171,7 +187,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone five pickup
         backToPickup4 = drive.trajectorySequenceBuilder(backToDropOff3.end())
-                .strafeTo(new Vector2d(53, -9))
+                .strafeTo(STACK_4)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -185,7 +201,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone five drop off
         backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(18, -12))
+                .strafeTo(D2_4)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -194,7 +210,7 @@ public class RightSideMedium extends AutoBase {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Side;
                 } )
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(1.8, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
@@ -204,7 +220,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone six pickup
         backToPickup5 = drive.trajectorySequenceBuilder(backToDropOff4.end())
-                .strafeTo(new Vector2d(53, -9))
+                .strafeTo(STACK_5)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -218,16 +234,16 @@ public class RightSideMedium extends AutoBase {
 
         // cone six drop off
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(18, -12))
+                .strafeTo(D2_5)
                 .addTemporalMarker(.1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM-20);
                 })
                 .addTemporalMarker(.5, () -> {
                     clawTiltServo.setPosition(robotState.CLAWLEFTTILT);
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Side;
                 } )
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(1.8, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
@@ -264,6 +280,18 @@ public class RightSideMedium extends AutoBase {
                 .build();
 
         backToPickup6_right = drive.trajectorySequenceBuilder(backToDropOff5.end())
+                .setVelConstraint(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 50;
+                    }
+                })
+                .setAccelConstraint(new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 45;
+                    }
+                })
                 .addTemporalMarker(0.1, () -> {
                     armServo.setPosition(robotState.ARMFRONTPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Front;
@@ -287,54 +315,54 @@ public class RightSideMedium extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup1);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(200);
+        sleep(150);
 
         drive.followTrajectorySequence(backToDropOff1);
 
         drive.followTrajectorySequence(backToPickup2);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(200);
+        sleep(150);
 
         drive.followTrajectorySequence(backToDropOff2);
 
         drive.followTrajectorySequence(backToPickup3);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
-        sleep(100);
+        //sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(200);
+        sleep(150);
 
         drive.followTrajectorySequence(backToDropOff3);
 
         drive.followTrajectorySequence(backToPickup4);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
-        sleep(100);
+        //sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(200);
+        sleep(150);
 
         drive.followTrajectorySequence(backToDropOff4);
 
         drive.followTrajectorySequence(backToPickup5);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
-        sleep(100);
+        //sleep(100);
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(200);
+        sleep(150);
 
         drive.followTrajectorySequence(backToDropOff5);
     }
