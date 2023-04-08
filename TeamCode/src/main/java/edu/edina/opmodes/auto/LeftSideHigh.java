@@ -32,6 +32,19 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Autonomous(group = "Left")
 @Config
 public class LeftSideHigh extends AutoBase {
+
+    public static Vector2d D2 = new Vector2d(-33, -22);
+    public static Vector2d STACK_1 = new Vector2d(-58, -15);
+    public static Vector2d D2_1 = new Vector2d(-21, -12);
+    public static Vector2d STACK_2 = new Vector2d(-58, -15);
+    public static Vector2d D2_2 = new Vector2d(-21, -12);
+    public static Vector2d STACK_3 = new Vector2d(-58, -15);
+    public static Vector2d D2_3 = new Vector2d(-21, -12);
+    public static Vector2d STACK_4 = new Vector2d(-58, -15);
+    public static Vector2d D2_4 = new Vector2d(-21, -12);
+    public static Vector2d STACK_5 = new Vector2d(-58, -15);
+    public static Vector2d D2_5 = new Vector2d(-21, -12);
+
     @Override
     protected String getCameraName() {
         return "highCamera";
@@ -68,13 +81,13 @@ public class LeftSideHigh extends AutoBase {
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 })
-                .strafeTo(new Vector2d(-33, -22))
+                .strafeTo(D2)
                 .build();
 
         // cone two pickup
         backToPickup1 = drive.trajectorySequenceBuilder(start.end())
                 .strafeLeft(11)
-                .strafeTo(new Vector2d(-58, -15))
+                .strafeTo(STACK_1)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -90,7 +103,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone two dropoff
         backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
-                .strafeTo(new Vector2d(-21, -12))
+                .strafeTo(D2_1)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -108,7 +121,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone three pickup
         backToPickup2 = drive.trajectorySequenceBuilder(backToDropOff1.end())
-                .strafeTo(new Vector2d(-58, -15))
+                .strafeTo(STACK_2)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -126,7 +139,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone three dropoff
         backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
-                .strafeTo(new Vector2d(-21, -11))
+                .strafeTo(D2_2)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -144,7 +157,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone four pickup
         backToPickup3 = drive.trajectorySequenceBuilder(backToDropOff2.end())
-                .strafeTo(new Vector2d(-58, -15))
+                .strafeTo(STACK_3)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -162,7 +175,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone four drop off
         backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
-                .strafeTo(new Vector2d(-21, -11))
+                .strafeTo(D2_3)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -180,7 +193,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone five pickup
         backToPickup4 = drive.trajectorySequenceBuilder(backToDropOff3.end())
-                .strafeTo(new Vector2d(-58, -13))
+                .strafeTo(STACK_4)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -198,7 +211,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone five drop off
         backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(-21, -10))
+                .strafeTo(D2_4)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -217,7 +230,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone six pickup
         backToPickup5 = drive.trajectorySequenceBuilder(backToDropOff4.end())
-                .strafeTo(new Vector2d(-58, -12))
+                .strafeTo(STACK_5)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -235,7 +248,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone six drop off
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(-21, -10))
+                .strafeTo(D2_5)
                 .addTemporalMarker(.1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
                 })
@@ -312,32 +325,34 @@ public class LeftSideHigh extends AutoBase {
 
         drive.followTrajectorySequence(backToPickup1);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         drive.followTrajectorySequence(backToDropOff1);
 
         drive.followTrajectorySequence(backToPickup2);
-
-        checkToMoveBackwards();
+/*
+        //checkToMoveBackwards();
 
         drive.followTrajectorySequence(backToDropOff2);
 
         drive.followTrajectorySequence(backToPickup3);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         drive.followTrajectorySequence(backToDropOff3);
 
         drive.followTrajectorySequence(backToPickup4);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         drive.followTrajectorySequence(backToDropOff4);
 
         drive.followTrajectorySequence(backToPickup5);
 
-        checkToMoveBackwards();
+        //checkToMoveBackwards();
 
         drive.followTrajectorySequence(backToDropOff5);
+
+ */
     }
 }
