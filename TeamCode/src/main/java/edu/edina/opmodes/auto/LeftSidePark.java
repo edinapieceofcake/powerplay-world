@@ -49,6 +49,7 @@ public class LeftSidePark extends AutoBase {
 
     @Override
     public void initPaths() {
+        Vector2d startEndPoint = new Vector2d(-30, -22);
         // cone one drop off
         start = drive.trajectorySequenceBuilder(new Pose2d(-33, -65, Math.toRadians(0)))
                 .addTemporalMarker(.1, () -> {
@@ -61,7 +62,7 @@ public class LeftSidePark extends AutoBase {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                 } )
-                .strafeTo(new Vector2d(-30, -22))
+                .strafeTo(startEndPoint)
                 .build();
 
         // park

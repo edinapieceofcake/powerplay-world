@@ -54,6 +54,23 @@ public class LeftSideHigh extends AutoBase {
 
     @Override
     protected void initPaths() {
+        Vector2d startEndPoint = new Vector2d(-30, -21);
+        //cone2
+        Vector2d backToPickup1EndPoint = new Vector2d(-54, -14);
+        Vector2d backToDropoff1EndPoint = new Vector2d(-18, -11.25);
+        //cone3
+        Vector2d backToPickup2EndPoint = new Vector2d(-54, -14.5);
+        Vector2d backToDropoff2EndPoint = new Vector2d(-19, -11.25);
+        //cone4
+        Vector2d backToPickup3EndPoint = new Vector2d(-55, -16);
+        Vector2d backToDropoff3EndPoint = new Vector2d(-20, -13);
+        //cone5
+        Vector2d backToPickup4EndPoint = new Vector2d(-55, -16);
+        Vector2d backToDropoff4EndPoint = new Vector2d(-20, -13);
+        //cone6
+        Vector2d backtoPickup5EndPoint = new Vector2d(-54, -16);
+        Vector2d backToDropoff5EndPoint = new Vector2d(-20, -13);
+
         // cone one drop off
         start = drive.trajectorySequenceBuilder(getStartPose())
                 .addTemporalMarker(.1, () -> {
@@ -68,13 +85,13 @@ public class LeftSideHigh extends AutoBase {
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 })
-                .strafeTo(new Vector2d(-30, -21))
+                .strafeTo(startEndPoint)
                 .build();
 
         // cone two pickup
         backToPickup1 = drive.trajectorySequenceBuilder(start.end())
                 .strafeLeft(11)
-                .strafeTo(new Vector2d(-54, -14))
+                .strafeTo(backToPickup1EndPoint)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -86,7 +103,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone two dropoff
         backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
-                .strafeTo(new Vector2d(-18, -11.25))
+                .strafeTo(backToDropoff1EndPoint)
                 .addTemporalMarker(0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -107,7 +124,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone three pickup
         backToPickup2 = drive.trajectorySequenceBuilder(backToDropOff1.end())
-                .strafeTo(new Vector2d(-54, -14.5))
+                .strafeTo(backToPickup2EndPoint)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -121,7 +138,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone three dropoff
         backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
-                .strafeTo(new Vector2d(-19, -11.25))
+                .strafeTo(backToDropoff2EndPoint)
                 .addTemporalMarker(0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -142,7 +159,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone four pickup
         backToPickup3 = drive.trajectorySequenceBuilder(backToDropOff2.end())
-                .strafeTo(new Vector2d(-55, -16))
+                .strafeTo(backToPickup3EndPoint)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -156,7 +173,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone four drop off
         backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
-                .strafeTo(new Vector2d(-20, -13))
+                .strafeTo(backToDropoff3EndPoint)
                 .addTemporalMarker(0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -177,7 +194,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone five pickup
         backToPickup4 = drive.trajectorySequenceBuilder(backToDropOff3.end())
-                .strafeTo(new Vector2d(-55, -16))
+                .strafeTo(backToPickup4EndPoint)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -191,7 +208,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone five drop off
         backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
-                .strafeTo(new Vector2d(-20, -13))
+                .strafeTo(backToDropoff4EndPoint)
                 .addTemporalMarker(0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
@@ -213,7 +230,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone six pickup - fix the drift by moving to -6.75
         backToPickup5 = drive.trajectorySequenceBuilder(backToDropOff4.end())
-                .strafeTo(new Vector2d(-54, -16))
+                .strafeTo(backtoPickup5EndPoint)
                 .addTemporalMarker(.1, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Back;
@@ -227,7 +244,7 @@ public class LeftSideHigh extends AutoBase {
 
         // cone six drop off
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
-                .strafeTo(new Vector2d(-20, -13))
+                .strafeTo(backToDropoff5EndPoint)
                 .addTemporalMarker(0, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
                 })
