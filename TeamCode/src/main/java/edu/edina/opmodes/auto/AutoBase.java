@@ -101,7 +101,7 @@ public class AutoBase extends LinearOpMode {
     protected TrajectorySequence backToPickup6_middle;
     protected TrajectorySequence backToPickup6_right;
 
-    protected int detectionId = 9;
+    protected int detectionId = 3;
 
     protected boolean shouldClawBeInTheFront() {
         return true;
@@ -270,7 +270,7 @@ public class AutoBase extends LinearOpMode {
         if (difference > 0) {
             double travelDistance = difference / 301.0 * 384.5;
             long futurePosition = leftFront.getCurrentPosition() + (long)travelDistance;
-            long futureTime = System.currentTimeMillis() + 500;
+            long futureTime = System.currentTimeMillis() + 300;
 
             leftFront.setPower(.1);
             leftRear.setPower(.1);
