@@ -33,16 +33,16 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class RightSideHigh extends AutoBase {
 
-    public static Vector2d D2 = new Vector2d(29, -22);
-    public static Vector2d STACK_1 = new Vector2d(53, -11);
-    public static Vector2d D2_1 = new Vector2d(18.5, -11);
-    public static Vector2d STACK_2 = new Vector2d(53, -11);
-    public static Vector2d D2_2 = new Vector2d(18.5, -11);
-    public static Vector2d STACK_3 = new Vector2d(53, -11);
-    public static Vector2d D2_3 = new Vector2d(18.5, -11);
-    public static Vector2d STACK_4 = new Vector2d(53, -11);
-    public static Vector2d D2_4 = new Vector2d(18.5, -11);
-    public static Vector2d STACK_5 = new Vector2d(53, -11.5);
+    public static Vector2d D2 = new Vector2d(31, -22);
+    public static Vector2d STACK_1 = new Vector2d(56.25, -12);
+    public static Vector2d D2_1 = new Vector2d(18.5, -11.5);
+    public static Vector2d STACK_2 = new Vector2d(56.25, -11.5);
+    public static Vector2d D2_2 = new Vector2d(18.5, -11.5);
+    public static Vector2d STACK_3 = new Vector2d(56.25, -11);
+    public static Vector2d D2_3 = new Vector2d(18.5, -11.5);
+    public static Vector2d STACK_4 = new Vector2d(56.25, -11);
+    public static Vector2d D2_4 = new Vector2d(18.5, -11.5);
+    public static Vector2d STACK_5 = new Vector2d(56.25, -11);
     public static Vector2d D2_5 = new Vector2d(18.5, -11);
 
     @Override
@@ -354,5 +354,6 @@ public class RightSideHigh extends AutoBase {
         sleep(150);
 
         drive.followTrajectorySequence(backToDropOff5);
+
     }
 }
