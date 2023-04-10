@@ -18,9 +18,19 @@ public class RobotState {
     public boolean LiftSwitch = false;
     public boolean LiftMotorReset = false;
     public double SpeedMultiplier = 0.5;
-    public double CLAWOPENPOSITION = 0.56;
-    public double CLAWMIDDLEPOSITION = 0.7;
-    public double CLAWCLOSEDPOSITION = 0.83;
+    /*
+        Original Claw - Uncomment if swapped back and comment out current settings
+        public double CLAWOPENPOSITION = 0.56;
+        public double CLAWMIDDLEPOSITION = 0.7;
+        public double CLAWCLOSEDPOSITION = 0.83;
+        public double CLAWOPENFORDROPOFF = .59;
+        public int CLAWOPENPOSITION100 = 56;
+    */
+    public double CLAWOPENPOSITION = 0.46;
+    public int CLAWOPENPOSITION100 = 46;
+    public double CLAWMIDDLEPOSITION = 0.53;
+    public double CLAWCLOSEDPOSITION = 0.61;
+    public double CLAWOPENFORDROPOFF = .37;
 
     public double CLAWRIGHTPICKUPTILTPOSITION = 0.42;
     public double CLAWLEFTPICKUPTILTPOSITION = 0.62;
@@ -28,8 +38,6 @@ public class RobotState {
     public double CLAWRIGHTDROPOFFTILTPOSITION = 0.25;
     public double CLAWLEFTDROPOFFTILTPOSITION = 0.85;
 
-    public double CLAWOPENFORDROPOFF = .59;
-    public int CLAWOPENPOSITION100 = 56;
     public double ARMFRONTPOSITION = 0.14;
     public double ARMBACKPOSITION = 0.83;
     public double ARMSIDEPOSITION = 0.5;
