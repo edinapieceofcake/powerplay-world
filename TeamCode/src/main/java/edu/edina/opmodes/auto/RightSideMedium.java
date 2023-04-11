@@ -38,17 +38,21 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class RightSideMedium extends AutoBase {
 
-    public static Vector2d D2 = new Vector2d(30.5, -21);
-    public static Vector2d STACK_1 = new Vector2d(56, -9);
-    public static Vector2d D2_1 = new Vector2d(18.5, -12);
-    public static Vector2d STACK_2 = new Vector2d(56, -10);
-    public static Vector2d D2_2 = new Vector2d(18.5, -13);
-    public static Vector2d STACK_3 = new Vector2d(56, -10);
-    public static Vector2d D2_3 = new Vector2d(18.5, -13.5);
-    public static Vector2d STACK_4 = new Vector2d(56, -10.5);
-    public static Vector2d D2_4 = new Vector2d(18.5, -14);
-    public static Vector2d STACK_5 = new Vector2d(56, -10.5);
-    public static Vector2d D2_5 = new Vector2d(18.5, -14.5);
+    protected static double STACK_X = 57;
+    protected static double STACK_Y = -9;
+    protected static double D2_X = 18.5;
+    protected static double D2_Y = -12;
+    public static Vector2d D2 = new Vector2d(32, -21);
+    public static Vector2d STACK_1 = new Vector2d(STACK_X, STACK_Y);
+    public static Vector2d D2_1 = new Vector2d(D2_X, D2_Y);
+    public static Vector2d STACK_2 = new Vector2d(STACK_X, STACK_Y -1);
+    public static Vector2d D2_2 = new Vector2d(D2_X, D2_Y -1);
+    public static Vector2d STACK_3 = new Vector2d(STACK_X, STACK_Y -1.5);
+    public static Vector2d D2_3 = new Vector2d(D2_X, D2_Y -1.5);
+    public static Vector2d STACK_4 = new Vector2d(STACK_X, STACK_Y -2);
+    public static Vector2d D2_4 = new Vector2d(D2_X, D2_Y -2.5);
+    public static Vector2d STACK_5 = new Vector2d(STACK_X, STACK_Y -2);
+    public static Vector2d D2_5 = new Vector2d(D2_X, D2_Y -3);
 
     @Override
     protected String getCameraName() {
@@ -59,10 +63,6 @@ public class RightSideMedium extends AutoBase {
     protected void addAdditionalTelemetry(Telemetry telemetry) {
         telemetry.addData("Make sure claw is in the front and low camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
-        telemetry.addData("start", start.duration());
-        telemetry.addData("backToPickup1", backToPickup1.duration());
-        telemetry.addData("backToDropOff1", backToDropOff1.duration());
-        telemetry.addData("backToPickup2", backToPickup2.duration());
     }
 
     @Override
@@ -259,11 +259,13 @@ public class RightSideMedium extends AutoBase {
                 .addTemporalMarker(0.6, () -> {
                     armServo.setPosition(robotState.ARMFRONTPOSITION);
                     robotState.ArmServoPosition = ArmServoPosition.Front;
+                    clawServo.setPosition(robotState.CLAWOPENPOSITION);
+                    robotState.ClawServoPosition = ClawServoPosition.Open;
                 })
                 .addTemporalMarker(0.8, () -> {
                     liftMotor.setTargetPosition(0);
                 })
-                .forward(10)
+                .forward(7)
                 .build();
 
         backToPickup6_middle = drive.trajectorySequenceBuilder(backToDropOff5.end())
@@ -276,7 +278,7 @@ public class RightSideMedium extends AutoBase {
                 .addTemporalMarker(0.4, () -> {
                     liftMotor.setTargetPosition(0);
                 })
-                .back(15)
+                .back(17)
                 .build();
 
         backToPickup6_right = drive.trajectorySequenceBuilder(backToDropOff5.end())
@@ -301,7 +303,7 @@ public class RightSideMedium extends AutoBase {
                 .addTemporalMarker(0.4, () -> {
                     liftMotor.setTargetPosition(0);
                 })
-                .back(39)
+                .back(41)
                 .build();
 
     }
