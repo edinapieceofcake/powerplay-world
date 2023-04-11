@@ -56,12 +56,6 @@ public class LeftSideMedium extends AutoBase {
     protected void addAdditionalTelemetry(Telemetry telemetry) {
         telemetry.addData("Make sure claw is in the back and low camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
-        telemetry.addData("Start", start.duration());
-        telemetry.addData("backToPickup1", backToPickup1.duration());
-        telemetry.addData("backToDropOff1", backToDropOff1.duration());
-        telemetry.addData("backToPickup2", backToPickup2.duration());
-        telemetry.addData("backToDropOff2", backToDropOff2.duration());
-        telemetry.addData("backToPickup3", backToPickup3.duration());
     }
 
     @Override
@@ -321,7 +315,7 @@ public class LeftSideMedium extends AutoBase {
                 .addTemporalMarker(0.4, () -> {
                     liftMotor.setTargetPosition(0);
                 })
-                .forward(9)
+                .forward(11)
                 .build();
 
         backToPickup6_right = drive.trajectorySequenceBuilder(backToDropOff5.end())
