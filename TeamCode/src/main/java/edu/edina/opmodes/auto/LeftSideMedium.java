@@ -33,16 +33,18 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class LeftSideMedium extends AutoBase {
 
+    protected static double STACK_X = -57;
+    protected static double STACK_Y = -12;
     public static Vector2d D2 = new Vector2d(-32, -19);
-    public static Vector2d STACK_1 = new Vector2d(-57.25, -13);
+    public static Vector2d STACK_1 = new Vector2d(STACK_X -.25, STACK_Y - 1);
     public static Vector2d D2_1 = new Vector2d(-20, -12.5);
-    public static Vector2d STACK_2 = new Vector2d(-57.5, -12.75);
+    public static Vector2d STACK_2 = new Vector2d(STACK_X -.5, STACK_Y - .75);
     public static Vector2d D2_2 = new Vector2d(-20, -12.5);
-    public static Vector2d STACK_3 = new Vector2d(-57.5, -12.75);
+    public static Vector2d STACK_3 = new Vector2d(STACK_X -.5, STACK_Y - .75);
     public static Vector2d D2_3 = new Vector2d(-20, -12.75);
-    public static Vector2d STACK_4 = new Vector2d(-57.5, -12.75);
+    public static Vector2d STACK_4 = new Vector2d(STACK_X -.5, STACK_Y - .75);
     public static Vector2d D2_4 = new Vector2d(-20, -13);
-    public static Vector2d STACK_5 = new Vector2d(-57.5, -12.75);
+    public static Vector2d STACK_5 = new Vector2d(STACK_X -.5, STACK_Y - .75);
     public static Vector2d D2_5 = new Vector2d(-20, -13);
 
     @Override
