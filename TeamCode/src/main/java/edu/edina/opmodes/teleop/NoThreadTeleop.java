@@ -24,7 +24,7 @@ public class NoThreadTeleop extends OpMode {
         Servo centerServo = hardwareMap.get(Servo.class, "centerPodServo");
         leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
         rightServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        centerServo.setPosition(robot.robotState.SERVOUPPOSITION);
+        centerServo.setPosition(.45);
     }
 
     @Override

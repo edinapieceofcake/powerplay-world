@@ -38,10 +38,10 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 @Config
 public class RightSideMedium extends AutoBase {
 
-    protected static double STACK_X = 57;
+    protected static double STACK_X = 56.125;
     protected static double STACK_Y = -9;
     protected static double D2_X = 18.5;
-    protected static double D2_Y = -12;
+    protected static double D2_Y = -12.5;
     public static Vector2d D2 = new Vector2d(32, -21);
     public static Vector2d STACK_1 = new Vector2d(STACK_X, STACK_Y);
     public static Vector2d D2_1 = new Vector2d(D2_X, D2_Y);
@@ -92,7 +92,7 @@ public class RightSideMedium extends AutoBase {
 
         // cone two pickup
         backToPickup1 = drive.trajectorySequenceBuilder(start.end())
-                .strafeRight(12)
+                .strafeRight(11.875)
                 .strafeTo(STACK_1)
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMBACKPOSITION);
