@@ -42,7 +42,7 @@ public class RobotState {
     public double ARMSIDEPOSITION = 0.5;
 
     public double CLAWCENTERTILT = 0.5;
-    public double CLAWLEFTTILT = 0.73;
+    public double CLAWLEFTTILT = 0.72;
     public double CLAWRIGHTTILT = 0.35;
 
     public int CONESTACKPOSITION5 = -155;
