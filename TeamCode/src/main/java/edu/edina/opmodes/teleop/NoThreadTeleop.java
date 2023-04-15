@@ -30,8 +30,8 @@ public class NoThreadTeleop extends OpMode {
     @Override
     public void start() {
         leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        rightServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        centerServo.setPosition(.45);
+        rightServo.setPosition(.42);
+        centerServo.setPosition(.40);
 
         robot.lift.start();
     }

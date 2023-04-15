@@ -231,7 +231,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
                 .strafeTo(D2_5)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH - 10);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH - 15);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);

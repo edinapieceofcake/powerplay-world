@@ -69,7 +69,7 @@ public class RobotState {
     public double LiftUpSpeed = .9;
     public double LiftDownSpeed = .5;
 
-    public double SERVOUPPOSITION = .5;
+    public double SERVOUPPOSITION = .45;
     public double SERVODOWNPOSITION = 1.0;
 
     public double Voltage = 0.0;
