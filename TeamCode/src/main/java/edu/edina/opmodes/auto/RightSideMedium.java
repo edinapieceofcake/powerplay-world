@@ -50,9 +50,9 @@ public class RightSideMedium extends AutoBase {
     public static Vector2d STACK_3 = new Vector2d(STACK_X, STACK_Y -1.5);
     public static Vector2d D2_3 = new Vector2d(D2_X, D2_Y -1.5);
     public static Vector2d STACK_4 = new Vector2d(STACK_X, STACK_Y -2);
-    public static Vector2d D2_4 = new Vector2d(D2_X, D2_Y -1.5);
+    public static Vector2d D2_4 = new Vector2d(D2_X, D2_Y -2);
     public static Vector2d STACK_5 = new Vector2d(STACK_X, STACK_Y -2.5);
-    public static Vector2d D2_5 = new Vector2d(D2_X, D2_Y -2);
+    public static Vector2d D2_5 = new Vector2d(D2_X, D2_Y -2.5);
 
     @Override
     protected String getCameraName() {
