@@ -34,9 +34,9 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 public class RightSideHigh extends AutoBase {
     protected static double STACK_X = 56.875;
     protected static double STACK_Y = -11;
-    protected static double D2_X = 17.675;
+    protected static double D2_X = 17.5;
     protected static double D2_Y = -11.5;
-    public static Vector2d D2 = new Vector2d(31.75, -21.875);
+    public static Vector2d D2 = new Vector2d(31.75, -21.75);
     public static Vector2d STACK_1 = new Vector2d(STACK_X, STACK_Y -1);
     public static Vector2d D2_1 = new Vector2d(D2_X - .5, D2_Y-.25);
     public static Vector2d STACK_2 = new Vector2d(STACK_X, STACK_Y -.5);
@@ -74,7 +74,7 @@ public class RightSideHigh extends AutoBase {
                     liftMotor.setTargetPosition(robotState.POLEPOSITIONLOW);
                 })
                 .addTemporalMarker(1, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM+5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM+10);
                     clawTiltServo.setPosition(robotState.CLAWLEFTTILT);
                 })
                 .addTemporalMarker(2, () -> {
@@ -102,7 +102,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff1 = drive.trajectorySequenceBuilder(backToPickup1.end())
                 .strafeTo(D2_1)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -134,7 +134,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff2 = drive.trajectorySequenceBuilder(backToPickup2.end())
                 .strafeTo(D2_2)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -166,7 +166,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff3 = drive.trajectorySequenceBuilder(backToPickup3.end())
                 .strafeTo(D2_3)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -198,7 +198,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff4 = drive.trajectorySequenceBuilder(backToPickup4.end())
                 .strafeTo(D2_4)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 5);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH + 10);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -231,7 +231,7 @@ public class RightSideHigh extends AutoBase {
         backToDropOff5 = drive.trajectorySequenceBuilder(backToPickup5.end())
                 .strafeTo(D2_5)
                 .addTemporalMarker(0, () -> {
-                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH - 10);
+                    liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH - 5);
                 })
                 .addTemporalMarker(.5, () -> {
                     armServo.setPosition(robotState.ARMSIDEPOSITION);
@@ -311,7 +311,7 @@ public class RightSideHigh extends AutoBase {
 
         clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
         robotState.ClawServoPosition = ClawServoPosition.Closed;
-        sleep(150);
+        sleep(250);
 
         drive.followTrajectorySequence(backToDropOff1);
 

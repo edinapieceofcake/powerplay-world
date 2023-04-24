@@ -37,7 +37,7 @@ public class LeftSideMedium extends AutoBase {
     protected static double STACK_Y = -12;
     protected static double D2_X = -18.75;
     protected static double D2_Y = -12.5;
-    public static Vector2d D2 = new Vector2d(-31.25, -18.75);
+    public static Vector2d D2 = new Vector2d(-31.5, -18.75);
     public static Vector2d STACK_1 = new Vector2d(STACK_X -.25, STACK_Y - 1);
     public static Vector2d D2_1 = new Vector2d(D2_X, D2_Y);
     public static Vector2d STACK_2 = new Vector2d(STACK_X -.25, STACK_Y - .75);
