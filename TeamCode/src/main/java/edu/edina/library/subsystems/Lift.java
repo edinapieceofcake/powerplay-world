@@ -48,23 +48,25 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
             robotState.FutureTargetPosition = 0;
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-            clawServo.setPosition(robotState.CLAWOPENPOSITION);
-            robotState.ClawServoPosition = ClawServoPosition.Open;
-
-            armServo.setPosition(robotState.ARMFRONTPOSITION);
-            robotState.ArmServoPosition = ArmServoPosition.Front;
-
             robotState.TargetPoleLocation = PoleLocation.None;
             robotState.LiftSuccessfullySetup = true;
-
-            clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
-            robotState.ClawRotation = ClawRotation.Center;
         } catch (Exception ex) {
             robotState.LiftSuccessfullySetup = false;
         }
 
         this.robotState = robotState;
 
+    }
+
+    public void start(){
+        clawServo.setPosition(robotState.CLAWOPENPOSITION);
+        robotState.ClawServoPosition = ClawServoPosition.Open;
+
+        armServo.setPosition(robotState.ARMFRONTPOSITION);
+        robotState.ArmServoPosition = ArmServoPosition.Front;
+
+        clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+        robotState.ClawRotation = ClawRotation.Center;
     }
 
     @Override

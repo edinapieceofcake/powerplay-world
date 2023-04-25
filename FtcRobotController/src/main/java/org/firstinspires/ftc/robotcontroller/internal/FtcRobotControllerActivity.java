@@ -270,7 +270,7 @@ public class FtcRobotControllerActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // FtcDashboard.suppressOpMode();
+    FtcDashboard.suppressOpMode();
     if (enforcePermissionValidator()) {
       return;
     }

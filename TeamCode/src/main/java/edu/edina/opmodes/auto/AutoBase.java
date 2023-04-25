@@ -24,10 +24,32 @@ import edu.edina.library.util.ClawServoPosition;
 import edu.edina.library.util.RobotState;
 import edu.edina.library.vision.AprilTagDetectionPipeline;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+import org.openftc.apriltag.AprilTagDetection;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+
+import java.util.ArrayList;
+
+import edu.edina.library.util.ArmServoPosition;
+import edu.edina.library.util.ClawServoPosition;
+import edu.edina.library.util.RobotState;
+import edu.edina.library.vision.AprilTagDetectionPipeline;
 
 
 @Config
@@ -241,14 +263,14 @@ public class AutoBase extends LinearOpMode {
         }
     }
 
-    protected void checkToMoveForward(long timeout) {
+    protected void checkToMoveForward() {
         double distance = distanceSensor.getDistance(DistanceUnit.MM);
         double difference = distance - 35;
 
         if (difference > 0) {
             double travelDistance = difference / 301.0 * 384.5;
             long futurePosition = leftFront.getCurrentPosition() + (long)travelDistance;
-            long futureTime = System.currentTimeMillis() + timeout;
+            long futureTime = System.currentTimeMillis() + 300;
 
             leftFront.setPower(.1);
             leftRear.setPower(.1);
@@ -312,19 +334,11 @@ public class AutoBase extends LinearOpMode {
         setDetectionId();
         
         if (opModeIsActive()) {
-            resetRuntime();
-
             liftMotor.setPower(1);
 
             runPaths();
 
             runPark();
-
-            while (opModeIsActive()) {
-                telemetry.addData("Distance", distanceSensor.getDistance(DistanceUnit.MM));
-                telemetry.addData("Lift", liftMotor.getCurrentPosition());
-                telemetry.update();
-            }
         }
     }
 }

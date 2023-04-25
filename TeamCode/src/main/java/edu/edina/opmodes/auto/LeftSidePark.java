@@ -32,12 +32,12 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 public class LeftSidePark extends AutoBase {
 
     protected String getCameraName() {
-        return "lowCamera";
+        return "highCamera";
     }
 
     @Override
     protected void addAdditionalTelemetry(Telemetry telemetry) {
-        telemetry.addData("Make sure claw is in the front and low camera is facing field.", "");
+        telemetry.addData("Make sure claw is in the front and high   camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
     }
 
@@ -49,7 +49,7 @@ public class LeftSidePark extends AutoBase {
 
     @Override
     public void initPaths() {
-        Vector2d startEndPoint = new Vector2d(-30, -22);
+        Vector2d startEndPoint = new Vector2d(-33, -22);
         // cone one drop off
         start = drive.trajectorySequenceBuilder(new Pose2d(-33, -65, Math.toRadians(0)))
                 .addTemporalMarker(.1, () -> {
@@ -57,11 +57,15 @@ public class LeftSidePark extends AutoBase {
                 })
                 .addTemporalMarker(1, () -> {
                     liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONMEDIUM);
+                    clawTiltServo.setPosition(robotState.CLAWRIGHTTILT);
                 })
-                .addTemporalMarker(2, () -> {
+                .addTemporalMarker(2.1, () -> {
+                    clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+                })
+                .addTemporalMarker(2.2, () -> {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     robotState.ClawServoPosition = ClawServoPosition.Open;
-                } )
+                })
                 .strafeTo(startEndPoint)
                 .build();
 
@@ -71,7 +75,7 @@ public class LeftSidePark extends AutoBase {
                     liftMotor.setTargetPosition(0);
                 })
                 .strafeRight(13)
-                .back(25.5)
+                .back(28)
                 .build();
 
         backToPickup6_middle = drive.trajectorySequenceBuilder(start.end())
@@ -79,6 +83,7 @@ public class LeftSidePark extends AutoBase {
                     liftMotor.setTargetPosition(0);
                 })
                 .strafeRight(13)
+                .back(2)
                 .build();
 
         backToPickup6_right = drive.trajectorySequenceBuilder(start.end())

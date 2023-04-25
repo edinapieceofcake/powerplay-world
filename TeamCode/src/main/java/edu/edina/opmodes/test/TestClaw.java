@@ -65,12 +65,12 @@ public class TestClaw extends LinearOpMode {
 
             if (pad1.y) {
                 // slicer in front
-                clawServo.setPosition(robotState.CLAWOPENPOSITION);
+                clawServo.setPosition(clawServo.getPosition() - .01);
             }
 
             if (pad1.x) {
                 // slicer in back requiring more rotation
-                clawServo.setPosition(robotState.CLAWCLOSEDPOSITION);
+                clawServo.setPosition(clawServo.getPosition() + .01);
             }
 
             if (pad1.left_bumper) {

@@ -18,20 +18,19 @@ public class RobotState {
     public boolean LiftSwitch = false;
     public boolean LiftMotorReset = false;
     public double SpeedMultiplier = 0.5;
-    /*
-        Original Claw - Uncomment if swapped back and comment out current settings
-        public double CLAWOPENPOSITION = 0.56;
-        public double CLAWMIDDLEPOSITION = 0.7;
-        public double CLAWCLOSEDPOSITION = 0.83;
-        public double CLAWOPENFORDROPOFF = .59;
-        public int CLAWOPENPOSITION100 = 56;
-    */
-    public double CLAWOPENPOSITION = 0.46;
-    public int CLAWOPENPOSITION100 = 46;
+/*
+    Original Claw - Uncomment if swapped back and comment out current settings
+    public double CLAWOPENPOSITION = 0.56;
+    public double CLAWMIDDLEPOSITION = 0.7;
+    public double CLAWCLOSEDPOSITION = 0.83;
+    public double CLAWOPENFORDROPOFF = .59;
+    public int CLAWOPENPOSITION100 = 56;
+*/
+    public double CLAWOPENPOSITION = 0.44;
+    public int CLAWOPENPOSITION100 = 44;
     public double CLAWMIDDLEPOSITION = 0.53;
-    public double CLAWCLOSEDPOSITION = 0.61;
+    public double CLAWCLOSEDPOSITION = 0.65;
     public double CLAWOPENFORDROPOFF = .37;
-
     public double CLAWRIGHTPICKUPTILTPOSITION = 0.42;
     public double CLAWLEFTPICKUPTILTPOSITION = 0.62;
 
@@ -43,13 +42,13 @@ public class RobotState {
     public double ARMSIDEPOSITION = 0.5;
 
     public double CLAWCENTERTILT = 0.5;
-    public double CLAWLEFTTILT = 0.73;
+    public double CLAWLEFTTILT = 0.72;
     public double CLAWRIGHTTILT = 0.35;
 
-    public int CONESTACKPOSITION5 = -170;
-    public int CONESTACKPOSITION4 = -135;
-    public int CONESTACKPOSITION3 = -90;
-    public int CONESTACKPOSITION2 = -45;
+    public int CONESTACKPOSITION5 = -155;
+    public int CONESTACKPOSITION4 = -115;
+    public int CONESTACKPOSITION3 = -65;
+    public int CONESTACKPOSITION2 = -35;
     public int CONESTACKPOSITION1 = 0;
 
     public int POLEPOSITIONLOW = -465;
@@ -70,7 +69,7 @@ public class RobotState {
     public double LiftUpSpeed = .9;
     public double LiftDownSpeed = .5;
 
-    public double SERVOUPPOSITION = .5;
+    public double SERVOUPPOSITION = .45;
     public double SERVODOWNPOSITION = 1.0;
 
     public double Voltage = 0.0;
