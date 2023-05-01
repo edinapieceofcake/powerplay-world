@@ -11,27 +11,20 @@ public class NoThreadTeleop extends OpMode {
     private NoThreadRobot robot;
     private Stickygamepad _gamepad1;
     private Stickygamepad _gamepad2;
-    private Servo leftServo;
-    private Servo rightServo;
-    private Servo centerServo;
-
 
     public void init() {
         _gamepad1 = new Stickygamepad(gamepad1);
         _gamepad2 = new Stickygamepad(gamepad2);
 
-        robot = new NoThreadRobot(this, telemetry);
+        robot = new NoThreadRobot(telemetry, hardwareMap);
 
-        leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        centerServo = hardwareMap.get(Servo.class, "centerPodServo");
     }
 
     @Override
     public void start() {
-        leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        rightServo.setPosition(.42);
-        centerServo.setPosition(.40);
+        robot.robotHardware.leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
+        robot.robotHardware.rightServo.setPosition(.42);
+        robot.robotHardware.centerServo.setPosition(.40);
 
         robot.lift.start();
     }

@@ -1,6 +1,7 @@
 package edu.edina.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -14,6 +15,7 @@ import edu.edina.library.subsystems.Lift;
 import edu.edina.library.subsystems.MecanumDrive;
 import edu.edina.library.subsystems.Subsystem;
 import edu.edina.library.util.ClawRotation;
+import edu.edina.library.util.RobotHardware;
 import edu.edina.library.util.RobotState;
 
 public class NoThreadRobot {
@@ -23,6 +25,7 @@ public class NoThreadRobot {
     public MecanumDrive driveRR;
     public Lift lift;
     public RobotState robotState = new RobotState();
+    public RobotHardware robotHardware;
 
     public void update() {
         for (Subsystem subsystem : subsystems) {
@@ -31,18 +34,19 @@ public class NoThreadRobot {
         }
     }
 
-    public NoThreadRobot(OpMode opMode, Telemetry telemetry) {
+    public NoThreadRobot(Telemetry telemetry, HardwareMap map) {
         this.telemetry = telemetry;
+        this.robotHardware = new RobotHardware(map, robotState);
 
         subsystems = new ArrayList<>();
 
-        driveRR = new MecanumDrive(opMode.hardwareMap, robotState);
+        driveRR = new MecanumDrive(map, robotState);
         subsystems.add(driveRR);
 
-        lift = new Lift(opMode.hardwareMap, robotState);
+        lift = new Lift(robotState, robotHardware);
         subsystems.add(lift);
 
-        claw = new Claw(opMode.hardwareMap, robotState);
+        claw = new Claw(robotState, robotHardware);
         subsystems.add(claw);
     }
 

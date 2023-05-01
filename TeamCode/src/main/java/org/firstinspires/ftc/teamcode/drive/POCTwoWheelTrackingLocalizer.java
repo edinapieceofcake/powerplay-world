@@ -32,7 +32,7 @@ import java.util.List;
  *    \--------------/
  *
  */
-public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
+public class POCTwoWheelTrackingLocalizer extends POCTwoTrackingWheelLocalizer {
     public static double TICKS_PER_REV = 1000;
     public static double WHEEL_RADIUS = 1.35826772 / 2; // in
     public static double GEAR_RATIO = 22.0/30.0; // output (wheel) speed / input (encoder) speed
@@ -40,7 +40,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     public static double PARALLEL_X = -0.5625; // X is the up and down direction
     public static double PARALLEL_Y = -4.6875; // Y is the strafe direction
 
-    public static double PERPENDICULAR_X = 2.9375;
+    public static double PERPENDICULAR_X = 2.9875;
     public static double PERPENDICULAR_Y = -0.125;
 
     // Parallel/Perpendicular to the forward axis
@@ -54,9 +54,9 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     private SampleMecanumDrive drive;
     private List<Integer> lastEncPositions, lastEncVels;
 
-    public TwoWheelTrackingLocalizer(HardwareMap hardwareMap, SampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
+    public POCTwoWheelTrackingLocalizer(HardwareMap hardwareMap, SampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
         super(Arrays.asList(
-                new Pose2d(PARALLEL_X, PARALLEL_Y, Math.toRadians(0)),
+                new Pose2d(PARALLEL_X, PARALLEL_Y, 0),
                 new Pose2d(PERPENDICULAR_X, PERPENDICULAR_Y, Math.toRadians(90))
         ));
 
@@ -70,8 +70,8 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
     }
 
-    public TwoWheelTrackingLocalizer(HardwareMap hardwareMap, SampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels,
-                                     double parallelX, double parallelY, double parallelHeading, double perpendicularX, double perpendicularY, double perpendicularHeading) {
+    public POCTwoWheelTrackingLocalizer(HardwareMap hardwareMap, SampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels,
+                                        double parallelX, double parallelY, double parallelHeading, double perpendicularX, double perpendicularY, double perpendicularHeading) {
         super(Arrays.asList(
                 new Pose2d(parallelX, parallelY, Math.toRadians(parallelHeading)),
                 new Pose2d(perpendicularX, perpendicularY, Math.toRadians(perpendicularHeading))

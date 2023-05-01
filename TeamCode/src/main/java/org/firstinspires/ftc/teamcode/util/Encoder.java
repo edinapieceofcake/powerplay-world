@@ -42,7 +42,7 @@ public class Encoder {
         }
     }
 
-    private DcMotorEx motor;
+    public DcMotorEx motor;
     private NanoClock clock;
 
     private Direction direction;

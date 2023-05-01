@@ -27,33 +27,26 @@ import java.util.List;
  */
 @Config
 public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 8192;
-    public static double WHEEL_RADIUS = 1.37795276 / 2; // in
-    public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
+    public static double TICKS_PER_REV = 1000;
+    public static double WHEEL_RADIUS = 1.35826772 / 2; // in
+    public static double GEAR_RATIO = 22.0/30.0; // output (wheel) speed / input (encoder) speed
 
     //9.42, 8.49
-    public static double LATERAL_DISTANCE = 9.9375; //9.86; // in; distance between the left and right wheels
-    //    public static double LATERAL_DISTANCE = 9.75; // in; distance between the left and right wheels
-//    public static double LATERAL_DISTANCE = 9.43; // in; distance between the left and right wheels
-    //public static double LATERAL_DISTANCE = 9.3125; // in; distance between the left and right wheels
-    //public static double LATERAL_DISTANCE = 10.4; // in; distance between the left and right wheels
-    //public static double FORWARD_OFFSET = 2.17; // in; offset of the lateral wheel
-    //public static double FORWARD_OFFSET = 2.56; // in; offset of the lateral wheel
-    //public static double FORWARD_OFFSET = 2.17; // in; offset of the lateral wheel
-    //public static double FORWARD_OFFSET = 5.0; // in; offset of the lateral wheel
-    public static double FORWARD_OFFSET = 3.779; // in; offset of the lateral wheel
-    private Encoder leftEncoder, rightEncoder, frontEncoder;
-    //public static double X_MULTIPLIER = 1.021; // Multiplier in the X direction
-    //public static double Y_MULTIPLIER = 1.035; // Multiplier in the Y direction
-    public static double X_MULTIPLIER = 1.034; //1.020; // Multiplier in the X direction
-    public static double Y_MULTIPLIER = 1.031; //1.020; // Multiplier in the Y direction
+    public static double PARALLEL_X = -0.5625; // X is the up and down direction
+    public static double PARALLEL_Y = -4.6875; // Y is the strafe direction
+
+    public static double PERPENDICULAR_X = 2.9875;
+    public static double PERPENDICULAR_Y = -0.125;
+    public Encoder leftEncoder, rightEncoder, frontEncoder;
+    public static double X_MULTIPLIER = 0.95051; // Multiplier in the X direction
+    public static double Y_MULTIPLIER = 0.94529; // Multiplier in the Y direction
     private List<Integer> lastEncPositions, lastEncVels;
 
     public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
         super(Arrays.asList(
-                new Pose2d(0, LATERAL_DISTANCE / 2, 0), // left
-                new Pose2d(0, -LATERAL_DISTANCE / 2, 0), // right
-                new Pose2d(FORWARD_OFFSET, 0, Math.toRadians(90)) // front
+                new Pose2d(PARALLEL_X, PARALLEL_Y, Math.toRadians(0)), // left
+                new Pose2d(PARALLEL_X, -PARALLEL_Y, Math.toRadians(0)), // right
+                new Pose2d(PERPENDICULAR_X, PERPENDICULAR_Y, Math.toRadians(90)) // front
         ));
 
         lastEncPositions = lastTrackingEncPositions;

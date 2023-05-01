@@ -1,6 +1,7 @@
 package edu.edina.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ThreadPool;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -9,9 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import edu.edina.library.subsystems.Claw;
 import edu.edina.library.subsystems.Lift;
 import edu.edina.library.subsystems.MecanumDrive;
 import edu.edina.library.subsystems.Subsystem;
+import edu.edina.library.util.RobotHardware;
 import edu.edina.library.util.RobotState;
 
 public class MultiThreadRobot {
@@ -23,7 +26,9 @@ public class MultiThreadRobot {
     private Telemetry telemetry;
     public MecanumDrive driveRR;
     public Lift lift;
+    public Claw claw;
     public RobotState robotState = new RobotState();
+    public RobotHardware robotHardware;
 
     private Runnable subsystemUpdateRunnable = () -> {
         while (!Thread.currentThread().isInterrupted()) {
@@ -44,20 +49,28 @@ public class MultiThreadRobot {
         }
     };
 
-    public MultiThreadRobot(OpMode opMode, Telemetry telemetry) {
+    public MultiThreadRobot(Telemetry telemetry, HardwareMap map) {
         this.telemetry = telemetry;
+        this.robotHardware = new RobotHardware(map, robotState);
 
         subsystems = new ArrayList<>();
 
         try {
-            driveRR = new MecanumDrive(opMode.hardwareMap, robotState);
+            driveRR = new MecanumDrive(map, robotState);
             subsystems.add(driveRR);
         } catch (IllegalArgumentException e) {
 
         }
 
         try {
-            lift = new Lift(opMode.hardwareMap, robotState);
+            lift = new Lift(robotState, robotHardware);
+            subsystems.add(lift);
+        } catch (IllegalArgumentException e){
+
+        }
+
+        try {
+            claw = new Claw(robotState, robotHardware);
             subsystems.add(lift);
         } catch (IllegalArgumentException e){
 
