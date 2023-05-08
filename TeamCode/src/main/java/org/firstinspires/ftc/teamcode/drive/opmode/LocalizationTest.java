@@ -133,11 +133,11 @@ public class LocalizationTest extends LinearOpMode {
             telemetry.addData("right", localizer.rightEncoder.motor.getCurrentPosition());
             telemetry.addData("center", localizer.frontEncoder.motor.getCurrentPosition());
             telemetry.update();
-/*
-            Log.i("2Wheel Encoders: ", String.format("%f\t%f\t%f", twoWheelTrackingLocalizer.getWheelPositions().get(0), twoWheelTrackingLocalizer.getWheelPositions().get(1), twoWheelTrackingLocalizer.getHeading()));
-            Log.i("2Wheel Velocities: ", String.format("%f\t%f\t%f", twoWheelTrackingLocalizer.getWheelVelocities().get(0), twoWheelTrackingLocalizer.getWheelVelocities().get(1), twoWheelTrackingLocalizer.getHeadingVelocity()));
-            Log.i("2Wheel Pose: ", String.format("%f\t%f\t%f", drive.getPoseEstimate().getX(), drive.getPoseEstimate().getY(), Math.toDegrees(drive.getPoseEstimate().getHeading())));
 
+            Log.i("2Wheel Encoders: ", String.format("%f\t%f\t%f", twoWheelTrackingLocalizer1.getWheelPositions().get(0), twoWheelTrackingLocalizer1.getWheelPositions().get(1), twoWheelTrackingLocalizer1.getHeading()));
+            Log.i("2Wheel Velocities: ", String.format("%f\t%f\t%f", twoWheelTrackingLocalizer1.getWheelVelocities().get(0), twoWheelTrackingLocalizer1.getWheelVelocities().get(1), twoWheelTrackingLocalizer1.getHeadingVelocity()));
+            Log.i("2Wheel Pose: ", String.format("%f\t%f\t%f", drive.getPoseEstimate().getX(), drive.getPoseEstimate().getY(), Math.toDegrees(drive.getPoseEstimate().getHeading())));
+/*
             Log.i("3Wheel Encoders: ", String.format("%f\t%f\t%f", localizer.getWheelPositions().get(0), localizer.getWheelPositions().get(1), localizer.getWheelPositions().get(2)));
             Log.i("3Wheel Velocities: ", String.format("%f\t%f\t%f", localizer.getWheelVelocities().get(0), localizer.getWheelVelocities().get(1), localizer.getWheelVelocities().get(2)));
             Log.i("3Wheel Pose: ", String.format("%f\t%f\t%f", localizer.getPoseEstimate().getX(), localizer.getPoseEstimate().getY(), Math.toDegrees(localizer.getPoseEstimate().getHeading())));
