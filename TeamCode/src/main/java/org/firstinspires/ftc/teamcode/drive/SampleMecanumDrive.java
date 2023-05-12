@@ -55,7 +55,8 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
  */
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(12, 0, 1);
+    public static PIDCoefficients X_PID = new PIDCoefficients(10, 0, 1);
+    public static PIDCoefficients Y_PID = new PIDCoefficients(12, 0, 1);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(10, 0, 0.3);
 
     public static double LATERAL_MULTIPLIER = 1;
@@ -83,8 +84,8 @@ public class SampleMecanumDrive extends MecanumDrive {
     public SampleMecanumDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
-                new Pose2d(0.25, 0.25, Math.toRadians(2.5)), .25);
+        follower = new HolonomicPIDVAFollower(X_PID, Y_PID, HEADING_PID,
+                new Pose2d(0.125, 0.125, Math.toRadians(2.5)), .5);
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
@@ -287,6 +288,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
+        System.out.println(String.format("Wheel Power: %f %f %f %f", v, v1, v2, v3));
         leftFront.setPower(v);
         leftRear.setPower(v1);
         rightRear.setPower(v2);

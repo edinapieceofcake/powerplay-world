@@ -66,9 +66,9 @@ public final class LogFiles {
         public double maxAngVel = DriveConstants.MAX_ANG_VEL;
         public double maxAngAccel = DriveConstants.MAX_ANG_ACCEL;
 
-        public double mecTransP = SampleMecanumDrive.TRANSLATIONAL_PID.kP;
-        public double mecTransI = SampleMecanumDrive.TRANSLATIONAL_PID.kI;
-        public double mecTransD = SampleMecanumDrive.TRANSLATIONAL_PID.kD;
+        public double mecTransP = SampleMecanumDrive.X_PID.kP;
+        public double mecTransI = SampleMecanumDrive.X_PID.kI;
+        public double mecTransD = SampleMecanumDrive.X_PID.kD;
         public double mecHeadingP = SampleMecanumDrive.HEADING_PID.kP;
         public double mecHeadingI = SampleMecanumDrive.HEADING_PID.kI;
         public double mecHeadingD = SampleMecanumDrive.HEADING_PID.kD;
