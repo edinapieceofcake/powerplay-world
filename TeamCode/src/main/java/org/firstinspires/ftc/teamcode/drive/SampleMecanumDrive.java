@@ -50,6 +50,8 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 
+import android.util.Log;
+
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
  */
@@ -202,6 +204,15 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     public void update() {
         updatePoseEstimate();
+        if (getLocalizer() instanceof StandardTrackingWheelLocalizer) {
+            Log.i("3Wheel Encoders: ", String.format("%f\t%f\t%f", getWheelPositions().get(0), getWheelPositions().get(1), getWheelPositions().get(2)));
+            Log.i("3Wheel Velocities: ", String.format("%f\t%f\t%f", getWheelVelocities().get(0), getWheelVelocities().get(1), getWheelVelocities().get(2)));
+            Log.i("3Wheel Pose: ", String.format("%f\t%f\t%f", getPoseEstimate().getX(), getPoseEstimate().getY(), Math.toDegrees(getPoseEstimate().getHeading())));
+        } else if (getLocalizer() instanceof TwoWheelTrackingLocalizer) {
+            Log.i("2Wheel Encoders: ", String.format("%f\t%f\t%f", getWheelPositions().get(0), getWheelPositions().get(1), ((TwoWheelTrackingLocalizer)getLocalizer()).getHeading()));
+            Log.i("2Wheel Velocities: ", String.format("%f\t%f\t%f", getWheelVelocities().get(0), getWheelVelocities().get(1), ((TwoWheelTrackingLocalizer)getLocalizer()).getHeadingVelocity()));
+            Log.i("2Wheel Pose: ", String.format("%f\t%f\t%f", getPoseEstimate().getX(), getPoseEstimate().getY(), Math.toDegrees(getPoseEstimate().getHeading())));
+        }
         DriveSignal signal = trajectorySequenceRunner.update(getPoseEstimate(), getPoseVelocity());
         if (signal != null) setDriveSignal(signal);
     }
@@ -298,6 +309,9 @@ public class SampleMecanumDrive extends MecanumDrive {
         return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
     }
 
+    public void resetIMUYaw() {
+        imu.resetYaw();
+    }
     @Override
     public Double getExternalHeadingVelocity() {
         return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;

@@ -58,6 +58,8 @@ public class LeftSideHigh extends AutoBase {
     protected void addAdditionalTelemetry(Telemetry telemetry) {
         telemetry.addData("Make sure claw is in the front and high camera is facing field.", "");
         telemetry.addData("Cone should always be on side with medium pole", "");
+        telemetry.addData("External Heading", Math.toDegrees(drive.getExternalHeading()));
+        telemetry.addData("Raw External Heading", Math.toDegrees(drive.getRawExternalHeading()));
     }
 
     @Override

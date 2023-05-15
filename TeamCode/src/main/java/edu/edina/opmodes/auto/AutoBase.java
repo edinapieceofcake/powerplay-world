@@ -336,6 +336,8 @@ public class AutoBase extends LinearOpMode {
         if (opModeIsActive()) {
             liftMotor.setPower(1);
 
+            drive.resetIMUYaw();
+
             runPaths();
 
             runPark();

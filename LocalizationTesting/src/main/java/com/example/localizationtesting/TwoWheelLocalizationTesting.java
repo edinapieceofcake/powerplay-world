@@ -36,7 +36,6 @@ public class TwoWheelLocalizationTesting {
         headingValues = new ArrayList<>();
         parallelEncoderVelocities = new ArrayList<>();
         perpendicularEncoderVelocities = new ArrayList<>();
-
         headingVelocities = new ArrayList<>();
 
         parallelEncoderPositions.add( 0.000000);
