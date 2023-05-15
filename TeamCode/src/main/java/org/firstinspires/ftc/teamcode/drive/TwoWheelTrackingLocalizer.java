@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -84,9 +86,13 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
+        double xPos = encoderTicksToInches(parallelEncoder.getCurrentPosition()) * X_MULTIPLIER;
+        double yPos = encoderTicksToInches(perpendicularEncoder.getCurrentPosition() * Y_MULTIPLIER);
+
+        Log.i("2Wheel Encoders: ", String.format(" %f %f %f", xPos, yPos, getHeading()));
+
         return Arrays.asList(
-                encoderTicksToInches(parallelEncoder.getCurrentPosition()) * X_MULTIPLIER,
-                encoderTicksToInches(perpendicularEncoder.getCurrentPosition() * Y_MULTIPLIER)
+                xPos, yPos
         );
     }
 
@@ -97,9 +103,14 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
         //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
         //  compensation method
 
+        double xVel = encoderTicksToInches(parallelEncoder.getRawVelocity()) * X_MULTIPLIER;
+        double yVel = encoderTicksToInches(perpendicularEncoder.getRawVelocity() * Y_MULTIPLIER);
+
+        Log.i("2Wheel Velocities: ", String.format("%f %f %f", xVel, yVel, getHeadingVelocity()));
+
+
         return Arrays.asList(
-                encoderTicksToInches(parallelEncoder.getRawVelocity() * X_MULTIPLIER),
-                encoderTicksToInches(perpendicularEncoder.getRawVelocity() * Y_MULTIPLIER)
+                xVel, yVel
         );
     }
 }
