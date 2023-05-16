@@ -332,6 +332,9 @@ public class AutoBase extends LinearOpMode {
         initPaths();
 
         setDetectionId();
+
+        drive.resetYaw();
+        drive.resetLocalizer();
         
         if (opModeIsActive()) {
             liftMotor.setPower(1);

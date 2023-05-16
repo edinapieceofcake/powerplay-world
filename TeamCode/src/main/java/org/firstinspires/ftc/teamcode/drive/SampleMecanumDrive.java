@@ -306,7 +306,15 @@ public class SampleMecanumDrive extends MecanumDrive {
         return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
     }
 
+    public void resetYaw() {
+        imu.resetYaw();
+    }
 
+    public void resetLocalizer() {
+        if (getLocalizer() instanceof TwoWheelTrackingLocalizer){
+            ((TwoWheelTrackingLocalizer) getLocalizer()).stopAndResetEncoders();
+        }
+    }
     public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
         return new MinVelocityConstraint(Arrays.asList(
                 new AngularVelocityConstraint(maxAngularVel),

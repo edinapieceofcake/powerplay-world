@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -108,9 +109,13 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         Log.i("2Wheel Velocities: ", String.format("%f %f %f", xVel, yVel, getHeadingVelocity()));
 
-
         return Arrays.asList(
                 xVel, yVel
         );
+    }
+
+    public void stopAndResetEncoders() {
+        parallelEncoder.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        perpendicularEncoder.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }
