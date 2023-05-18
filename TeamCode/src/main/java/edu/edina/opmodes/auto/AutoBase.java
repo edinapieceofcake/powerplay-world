@@ -198,6 +198,7 @@ public class AutoBase extends LinearOpMode {
                 telemetry.addData("FPS", camera.getFps());
                 telemetry.addData("Overhead ms", camera.getOverheadTimeMs());
                 telemetry.addData("Pipeline ms", camera.getPipelineTimeMs());
+                telemetry.addData("IMU", Math.toDegrees(drive.getRawExternalHeading()));
 
                 // If we don't see any tags
                 if (detections.size() == 0) {
@@ -331,7 +332,13 @@ public class AutoBase extends LinearOpMode {
 
         initPaths();
 
+        sleep(500);
+
+        drive.resetYaw();
+
         setDetectionId();
+
+        drive.resetYaw();
         
         if (opModeIsActive()) {
             liftMotor.setPower(1);

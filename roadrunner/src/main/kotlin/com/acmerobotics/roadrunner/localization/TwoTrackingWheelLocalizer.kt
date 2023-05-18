@@ -75,6 +75,7 @@ abstract class TwoTrackingWheelLocalizer(
             val headingDelta = Angle.normDelta(heading - lastHeading)
             val robotPoseDelta = calculatePoseDelta(wheelDeltas, headingDelta)
             _poseEstimate = Kinematics.relativeOdometryUpdate(_poseEstimate, robotPoseDelta)
+            System.out.println(String.format("WheelPose %f %f %f %f", _poseEstimate.x, _poseEstimate.y, Math.toDegrees(_poseEstimate.heading), Math.toDegrees(getHeading())))
         }
 
         val wheelVelocities = getWheelVelocities()

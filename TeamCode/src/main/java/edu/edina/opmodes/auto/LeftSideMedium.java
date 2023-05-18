@@ -338,36 +338,47 @@ public class LeftSideMedium extends AutoBase {
     protected void runPaths() {
         drive.setPoseEstimate(getStartPose());
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(start)");
         drive.followTrajectorySequence(start);
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup1)");
         drive.followTrajectorySequence(backToPickup1);
 
         //checkToMoveForward();
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff1)");
         drive.followTrajectorySequence(backToDropOff1);
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup2)");
         drive.followTrajectorySequence(backToPickup2);
 
         //checkToMoveForward();
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff2)");
         drive.followTrajectorySequence(backToDropOff2);
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup3)");
         drive.followTrajectorySequence(backToPickup3);
 
         //checkToMoveForward();
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff3)");
         drive.followTrajectorySequence(backToDropOff3);
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup4)");
         drive.followTrajectorySequence(backToPickup4);
 
         //checkToMoveForward();
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff4)");
         drive.followTrajectorySequence(backToDropOff4);
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup5)");
         drive.followTrajectorySequence(backToPickup5);
 
         //checkToMoveForward();
 
+        System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff5)");
         drive.followTrajectorySequence(backToDropOff5);
 
     }}

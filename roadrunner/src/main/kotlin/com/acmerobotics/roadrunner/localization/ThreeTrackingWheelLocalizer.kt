@@ -1,5 +1,6 @@
 package com.acmerobotics.roadrunner.localization
 
+import com.acmerobotics.roadrunner.drive.Drive
 import com.acmerobotics.roadrunner.geometry.Pose2d
 import com.acmerobotics.roadrunner.kinematics.Kinematics
 import org.apache.commons.math3.linear.Array2DRowRealMatrix
@@ -11,11 +12,14 @@ import org.apache.commons.math3.linear.MatrixUtils
  * Localizer based on three unpowered tracking omni wheels.
  *
  * @param wheelPoses wheel poses relative to the center of the robot (positive X points forward on the robot)
+ * @param drive wheel poses relative to the center of the robot (positive X points forward on the robot)
  */
 abstract class ThreeTrackingWheelLocalizer(
-    wheelPoses: List<Pose2d>
+    wheelPoses: List<Pose2d>,
+    drive: Drive
 ) : Localizer {
     private var _poseEstimate = Pose2d()
+    private var drive: Drive;
     override var poseEstimate: Pose2d
         get() = _poseEstimate
         set(value) {
@@ -30,6 +34,7 @@ abstract class ThreeTrackingWheelLocalizer(
     init {
         require(wheelPoses.size == 3) { "3 wheel positions must be provided" }
 
+        this.drive = drive;
         val inverseMatrix = Array2DRowRealMatrix(3, 3)
         for (i in 0..2) {
             val orientationVector = wheelPoses[i].headingVec()
@@ -69,6 +74,7 @@ abstract class ThreeTrackingWheelLocalizer(
                     .map { it.first - it.second }
             val robotPoseDelta = calculatePoseDelta(wheelDeltas)
             _poseEstimate = Kinematics.relativeOdometryUpdate(_poseEstimate, robotPoseDelta)
+            System.out.println(String.format("WheelPose %f %f %f %f", _poseEstimate.x, _poseEstimate.y, Math.toDegrees(_poseEstimate.heading), Math.toDegrees(getHeading())))
         }
 
         val wheelVelocities = getWheelVelocities()
@@ -83,6 +89,8 @@ abstract class ThreeTrackingWheelLocalizer(
      * Returns the positions of the tracking wheels in the desired distance units (not encoder counts!)
      */
     abstract fun getWheelPositions(): List<Double>
+
+    abstract fun getHeading(): Double
 
     /**
      * Returns the velocities of the tracking wheels in the desired distance units (not encoder counts!)
