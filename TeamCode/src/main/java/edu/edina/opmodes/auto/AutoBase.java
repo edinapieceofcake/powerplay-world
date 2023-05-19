@@ -335,6 +335,7 @@ public class AutoBase extends LinearOpMode {
         sleep(500);
 
         drive.resetYaw();
+        drive.resetLocalizerPositions();
 
         setDetectionId();
 

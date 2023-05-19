@@ -304,6 +304,13 @@ public class SampleMecanumDrive extends MecanumDrive {
         imu.resetYaw();
     }
 
+    public void resetLocalizerPositions() {
+        if (getLocalizer() instanceof TwoWheelTrackingLocalizer) {
+            ((TwoWheelTrackingLocalizer)getLocalizer()).resetEncoderPositions();
+        } else if (getLocalizer() instanceof StandardTrackingWheelLocalizer) {
+            ((StandardTrackingWheelLocalizer)getLocalizer()).resetEncoderPositions();
+        }
+    }
     @Override
     public Double getExternalHeadingVelocity() {
         return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;

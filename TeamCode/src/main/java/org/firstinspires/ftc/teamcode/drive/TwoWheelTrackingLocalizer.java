@@ -84,9 +84,14 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
+        double xPos = encoderTicksToInches(parallelEncoder.getCurrentPosition()) * X_MULTIPLIER;
+        double yPos = encoderTicksToInches(perpendicularEncoder.getCurrentPosition() * Y_MULTIPLIER);
+
+        System.out.println(String.format("2WheelPose parallelEncoderPositions.add(%f); perpendicularEncoderPositions.add(%f); headingValues.add(%f);", xPos, yPos, getHeading()));
+
         return Arrays.asList(
-                encoderTicksToInches(parallelEncoder.getCurrentPosition()) * X_MULTIPLIER,
-                encoderTicksToInches(perpendicularEncoder.getCurrentPosition() * Y_MULTIPLIER)
+                xPos,
+                yPos
         );
     }
 
@@ -101,5 +106,10 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
                 encoderTicksToInches(parallelEncoder.getRawVelocity() * X_MULTIPLIER),
                 encoderTicksToInches(perpendicularEncoder.getRawVelocity() * Y_MULTIPLIER)
         );
+    }
+
+    public void resetEncoderPositions() {
+        parallelEncoder.stopAndResetEncoder();
+        perpendicularEncoder.stopAndResetEncoder();
     }
 }

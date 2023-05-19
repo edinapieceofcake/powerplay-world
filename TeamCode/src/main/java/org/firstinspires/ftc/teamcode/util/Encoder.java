@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.util;
 import android.util.Log;
 
 import com.acmerobotics.roadrunner.util.NanoClock;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -130,5 +131,9 @@ public class Encoder {
                 ? Math.max(velocityEstimates[1], Math.min(velocityEstimates[0], velocityEstimates[2]))
                 : Math.max(velocityEstimates[0], Math.min(velocityEstimates[1], velocityEstimates[2]));
         return inverseOverflow(getRawVelocity(), median);
+   }
+
+   public void stopAndResetEncoder() {
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
    }
 }

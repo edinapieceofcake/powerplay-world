@@ -110,4 +110,10 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public double getHeading() {
         return drive.getRawExternalHeading();
     }
+
+    public void resetEncoderPositions() {
+        leftEncoder.stopAndResetEncoder();
+        rightEncoder.stopAndResetEncoder();
+        frontEncoder.stopAndResetEncoder();
+    }
 }
