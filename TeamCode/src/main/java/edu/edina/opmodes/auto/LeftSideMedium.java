@@ -34,9 +34,9 @@ import edu.edina.library.vision.AprilTagDetectionPipeline;
 public class LeftSideMedium extends AutoBase {
 
     protected static double STACK_X = -57;
-    protected static double STACK_Y = -12.5;
+    protected static double STACK_Y = -12.75;
     protected static double D2_X = -18.75;
-    protected static double D2_Y = -12.5;
+    protected static double D2_Y = -12.75;
     public static Vector2d D2 = new Vector2d(-31.5, -18.75);
     public static Vector2d STACK_1 = new Vector2d(STACK_X, STACK_Y);
     public static Vector2d D2_1 = new Vector2d(D2_X, D2_Y);
@@ -342,10 +342,12 @@ public class LeftSideMedium extends AutoBase {
         drive.followTrajectorySequence(start);
 
         System.out.println("WheelPose: drive.followTrajectorySequence(backToPickup1)");
+        drive.resetYaw();
         drive.followTrajectorySequence(backToPickup1);
 
         //checkToMoveForward();
 
+        drive.resetYaw();
         System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff1)");
         drive.followTrajectorySequence(backToDropOff1);
 
@@ -354,6 +356,7 @@ public class LeftSideMedium extends AutoBase {
 
         //checkToMoveForward();
 
+        drive.resetYaw();
         System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff2)");
         drive.followTrajectorySequence(backToDropOff2);
 
@@ -362,6 +365,7 @@ public class LeftSideMedium extends AutoBase {
 
         //checkToMoveForward();
 
+        drive.resetYaw();
         System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff3)");
         drive.followTrajectorySequence(backToDropOff3);
 
@@ -370,6 +374,7 @@ public class LeftSideMedium extends AutoBase {
 
         //checkToMoveForward();
 
+        drive.resetYaw();
         System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff4)");
         drive.followTrajectorySequence(backToDropOff4);
 
@@ -378,6 +383,7 @@ public class LeftSideMedium extends AutoBase {
 
         //checkToMoveForward();
 
+        drive.resetYaw();
         System.out.println("WheelPose: drive.followTrajectorySequence(backToDropOff5)");
         drive.followTrajectorySequence(backToDropOff5);
 
