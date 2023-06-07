@@ -1,38 +1,29 @@
 package edu.edina.opmodes.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import edu.edina.library.util.Stickygamepad;
 
-@TeleOp(name = "DriveMe", group = "teleop")
+@TeleOp(name = "DriveMeDisabled", group = "teleop")
+@Disabled
 public class NoThreadTeleop extends OpMode {
     private NoThreadRobot robot;
     private Stickygamepad _gamepad1;
     private Stickygamepad _gamepad2;
-    private Servo leftServo;
-    private Servo rightServo;
-    private Servo centerServo;
-
 
     public void init() {
         _gamepad1 = new Stickygamepad(gamepad1);
         _gamepad2 = new Stickygamepad(gamepad2);
 
-        robot = new NoThreadRobot(this, telemetry);
-
-        leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        centerServo = hardwareMap.get(Servo.class, "centerPodServo");
+        robot = new NoThreadRobot(hardwareMap, telemetry);
     }
 
     @Override
     public void start() {
-        leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        rightServo.setPosition(.42);
-        centerServo.setPosition(.40);
-
+        robot.claw.start();
         robot.lift.start();
     }
 
@@ -50,7 +41,7 @@ public class NoThreadTeleop extends OpMode {
         robot.lift.setLiftProperties(gamepad1.left_trigger, gamepad1.right_trigger,
                 _gamepad1.dpad_left, _gamepad1.dpad_up, _gamepad1.dpad_right,
                 _gamepad1.left_bumper, _gamepad1.right_bumper,
-                _gamepad1.x, _gamepad1.y, _gamepad1.b, _gamepad1.a);
+                _gamepad1.x, _gamepad1.y, _gamepad1.b, _gamepad1.a, 0);
 
         robot.claw.setClawProperties(_gamepad2.dpad_left, _gamepad2.dpad_up, _gamepad2.dpad_right,
                 _gamepad2.x, _gamepad2.y, _gamepad2.b);

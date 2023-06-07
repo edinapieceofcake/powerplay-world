@@ -4,17 +4,24 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 
+import edu.edina.library.util.RobotHardware;
 import edu.edina.library.util.RobotState;
 import edu.edina.library.util.ClawRotation;
 
 public class Claw extends edu.edina.library.subsystems.Subsystem {
-    private Servo clawTiltServo;
     private RobotState robotState;
+    private RobotHardware robotHardware;
 
-    public Claw(HardwareMap map, RobotState robotState) {
-        clawTiltServo = map.get(Servo.class, "clawTiltServo");
+    public Claw(RobotState robotState, RobotHardware robotHardware) {
         this.robotState = robotState;
+        this.robotHardware = robotHardware;
         robotState.ClawRotation = ClawRotation.Center;
+    }
+
+    public void start() {
+        robotHardware.leftServo.setPosition(robotState.SERVOUPPOSITION);
+        robotHardware.rightServo.setPosition(.42);
+        robotHardware.centerServo.setPosition(.40);
     }
 
     public void setClawProperties(boolean dpad_left, boolean dpad_up, boolean dpad_right,boolean x, boolean y, boolean b) {
@@ -75,19 +82,19 @@ public class Claw extends edu.edina.library.subsystems.Subsystem {
     public void update() {
         switch (robotState.ClawRotation){
             case Center:
-                clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
+                robotHardware.clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
                 break;
             case RightPickup:
-                clawTiltServo.setPosition(robotState.CLAWRIGHTPICKUPTILTPOSITION);
+                robotHardware.clawTiltServo.setPosition(robotState.CLAWRIGHTPICKUPTILTPOSITION);
                 break;
             case LeftPickup:
-                        clawTiltServo.setPosition(robotState.CLAWLEFTPICKUPTILTPOSITION);
+                robotHardware.clawTiltServo.setPosition(robotState.CLAWLEFTPICKUPTILTPOSITION);
                 break;
             case RightDropoff:
-                clawTiltServo.setPosition(robotState.CLAWRIGHTDROPOFFTILTPOSITION);
+                robotHardware.clawTiltServo.setPosition(robotState.CLAWRIGHTDROPOFFTILTPOSITION);
                 break;
             case LeftDropoff:
-                clawTiltServo.setPosition(robotState.CLAWLEFTDROPOFFTILTPOSITION);
+                robotHardware.clawTiltServo.setPosition(robotState.CLAWLEFTDROPOFFTILTPOSITION);
                 break;
         }
 

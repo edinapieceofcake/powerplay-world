@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.localization.POCThreeTrackingWheelLocalizer;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.teamcode.util.Encoder;
 
 import java.util.Arrays;
@@ -26,7 +28,7 @@ import java.util.List;
  *
  */
 @Config
-public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer {
+public class POCStandardTrackingWheelLocalizer extends POCThreeTrackingWheelLocalizer {
     public static double TICKS_PER_REV = 1000;
     public static double WHEEL_RADIUS = 1.37795276 / 2; // in
     public static double GEAR_RATIO = 22.0/30.0; // output (wheel) speed / input (encoder) speed
@@ -41,10 +43,10 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public static double X_MULTIPLIER = 0.95051; // Multiplier in the X direction
     public static double Y_MULTIPLIER = 0.94529; // Multiplier in the Y direction
     private List<Integer> lastEncPositions, lastEncVels;
-    ThreeWheelSampleMecanumDrive drive;
+    POCSampleMecanumDrive drive;
 
 
-    public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, ThreeWheelSampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
+    public POCStandardTrackingWheelLocalizer(HardwareMap hardwareMap, POCSampleMecanumDrive drive, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
         super(Arrays.asList(
                 new Pose2d(PARALLEL_X, PARALLEL_Y, 0), // left
                 new Pose2d(PARALLEL_X, -PARALLEL_Y, 0), // right

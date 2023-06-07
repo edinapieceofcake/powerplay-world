@@ -63,8 +63,8 @@ public class RobotState {
     public boolean DriveSuccessfullySetup = false;
     public int FutureTargetPosition = 0;
 
-    public double LowSpeedMultiplier = .5;
-    public double HighSpeedMultiplier = .75;
+    public double LowSpeedMultiplier = .25;
+    public double HighSpeedMultiplier = .25;
 
     public double LiftUpSpeed = .9;
     public double LiftDownSpeed = .5;
@@ -73,10 +73,14 @@ public class RobotState {
     public double SERVODOWNPOSITION = 1.0;
 
     public double Voltage = 0.0;
+    private long LastTime = System.currentTimeMillis();
 
     public RobotState() {}
 
     public void telemetry(Telemetry telemetry) {
+        telemetry.addData("LoopTime (ms)", System.currentTimeMillis() - LastTime);
+        LastTime = System.currentTimeMillis();
+
         if (LiftSuccessfullySetup) {
             telemetry.addData("Lift Position", LiftMotorLocation);
             telemetry.addData("ClawPosition", ClawPosition);

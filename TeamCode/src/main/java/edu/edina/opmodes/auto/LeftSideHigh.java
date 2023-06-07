@@ -328,36 +328,26 @@ public class LeftSideHigh extends AutoBase {
         drive.followTrajectorySequence(start);
 
         drive.followTrajectorySequence(backToPickup1);
-
-        //checkToMoveBackwards();
-
         drive.resetYaw();
+
         drive.followTrajectorySequence(backToDropOff1);
 
         drive.followTrajectorySequence(backToPickup2);
-
-        //checkToMoveBackwards();
 
         drive.resetYaw();
         drive.followTrajectorySequence(backToDropOff2);
 
         drive.followTrajectorySequence(backToPickup3);
 
-        //checkToMoveBackwards();
-
         drive.resetYaw();
         drive.followTrajectorySequence(backToDropOff3);
 
         drive.followTrajectorySequence(backToPickup4);
 
-        //checkToMoveBackwards();
-
         drive.resetYaw();
         drive.followTrajectorySequence(backToDropOff4);
 
         drive.followTrajectorySequence(backToPickup5);
-
-        //checkToMoveBackwards();
 
         drive.resetYaw();
         drive.followTrajectorySequence(backToDropOff5);
