@@ -31,7 +31,7 @@ import edu.edina.library.util.Stickygamepad;
  * encoder localizer heading may be significantly off if the track width has not been tuned).
  */
 @TeleOp(group = "drive")
-//@Disabled
+@Disabled
 public class LocalizationTest extends LinearOpMode {
     // The lateral distance between the left and right odometers
     // is called the trackwidth. This is very important for
