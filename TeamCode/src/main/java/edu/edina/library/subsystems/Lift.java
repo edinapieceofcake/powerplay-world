@@ -3,12 +3,8 @@ package edu.edina.library.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.VoltageSensor;
-
-import java.sql.Time;
 
 import edu.edina.library.util.ClawRotation;
 import edu.edina.library.util.ClawServoPosition;
@@ -68,7 +64,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
         robotState.ArmServoPosition = ArmServoPosition.Front;
 
         clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
-        robotState.ClawRotation = ClawRotation.Center;
+        robotState.ClawRotation = ClawRotation.Pickup;
     }
 
     @Override
@@ -78,7 +74,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
                 if (!runningToPosition) {
                     clawServo.setPosition(robotState.CLAWOPENPOSITION);
                     clawTiltServo.setPosition(robotState.CLAWCENTERTILT);
-                    robotState.ClawRotation = ClawRotation.Center;
+                    robotState.ClawRotation = ClawRotation.Pickup;
                     robotState.ClawServoPosition = ClawServoPosition.Open;
                     clawOpenStartedTime = System.currentTimeMillis();
                     runningToPosition = true;
@@ -132,7 +128,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
                 }
             }
         } else {
-            //if (!liftSwitch.getState()) {
+/*            if (!liftSwitch.getState()) {
                 if (!liftMotorReset) {
                     liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -143,7 +139,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
                 }
             //} else {
                 liftMotorReset = false;
-            //}
+            //}*/
 
             liftMotor.setTargetPosition(robotState.FutureTargetPosition);
         }

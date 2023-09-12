@@ -27,7 +27,8 @@ public class NoThreadRobot {
     public void update() {
         for (Subsystem subsystem : subsystems) {
             if (subsystem == null) continue;
-                subsystem.update();
+
+            subsystem.update();
         }
     }
 
