@@ -2,6 +2,7 @@ package edu.edina.library.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -22,7 +23,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
     private Servo armServo;
     private Servo clawServo;
     private Servo clawTiltServo;
-    private DigitalChannel liftSwitch;
+    //private DigitalChannel liftSwitch;
     private boolean runningToPosition;
     private boolean atZeroPosition;
     private int targetPosition = 0;
@@ -31,15 +32,16 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
     private boolean clawOpen = false;
 
     public Lift(HardwareMap map, RobotState robotState) {
-        try {
+        //try {
             liftMotor = map.get(DcMotorEx.class, "liftMotor");
+            liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             armServo = map.get(Servo.class, "armServo");
             clawServo = map.get(Servo.class, "clawServo");
-            liftSwitch = map.get(DigitalChannel.class, "liftSwitch");
+            //liftSwitch = map.get(DigitalChannel.class, "liftSwitch");
             clawTiltServo = map.get(Servo.class, "clawTiltServo");
 
             // set the digital channel to input.
-            liftSwitch.setMode(DigitalChannel.Mode.INPUT);
+            //liftSwitch.setMode(DigitalChannel.Mode.INPUT);
 
             liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             liftMotor.setTargetPosition(robotState.FutureTargetPosition);
@@ -50,9 +52,9 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
 
             robotState.TargetPoleLocation = PoleLocation.None;
             robotState.LiftSuccessfullySetup = true;
-        } catch (Exception ex) {
-            robotState.LiftSuccessfullySetup = false;
-        }
+        //} catch (Exception ex) {
+        //    robotState.LiftSuccessfullySetup = false;
+        //}
 
         this.robotState = robotState;
 
@@ -130,7 +132,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
                 }
             }
         } else {
-            if (!liftSwitch.getState()) {
+            //if (!liftSwitch.getState()) {
                 if (!liftMotorReset) {
                     liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -139,9 +141,9 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
                     robotState.FutureTargetPosition = 0;
                     liftMotorReset = true;
                 }
-            } else {
+            //} else {
                 liftMotorReset = false;
-            }
+            //}
 
             liftMotor.setTargetPosition(robotState.FutureTargetPosition);
         }
@@ -163,7 +165,7 @@ public class Lift extends edu.edina.library.subsystems.Subsystem {
         robotState.LiftMotorLocation = liftMotor.getCurrentPosition();
         robotState.ClawPosition = Math.round(clawServo.getPosition() * 100);
         robotState.ArmPosition = Math.round(armServo.getPosition() * 100);
-        robotState.LiftSwitch = liftSwitch.getState();
+        //robotState.LiftSwitch = liftSwitch.getState();
         robotState.LiftMotorReset = liftMotorReset;
     }
 

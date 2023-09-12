@@ -22,16 +22,16 @@ public class NoThreadTeleop extends OpMode {
 
         robot = new NoThreadRobot(this, telemetry);
 
-        leftServo = hardwareMap.get(Servo.class, "leftPodServo");
-        rightServo = hardwareMap.get(Servo.class, "rightPodServo");
-        centerServo = hardwareMap.get(Servo.class, "centerPodServo");
+        //leftServo = hardwareMap.get(Servo.class, "leftPodServo");
+        //rightServo = hardwareMap.get(Servo.class, "rightPodServo");
+        //centerServo = hardwareMap.get(Servo.class, "centerPodServo");
     }
 
     @Override
     public void start() {
-        leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
-        rightServo.setPosition(.42);
-        centerServo.setPosition(.40);
+        //leftServo.setPosition(robot.robotState.SERVOUPPOSITION);
+        //rightServo.setPosition(.42);
+        //centerServo.setPosition(.40);
 
         robot.lift.start();
     }

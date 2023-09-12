@@ -31,19 +31,19 @@ public class RobotState {
     public double CLAWMIDDLEPOSITION = 0.53;
     public double CLAWCLOSEDPOSITION = 0.65;
     public double CLAWOPENFORDROPOFF = .37;
-    public double CLAWRIGHTPICKUPTILTPOSITION = 0.42;
-    public double CLAWLEFTPICKUPTILTPOSITION = 0.62;
+    public double CLAWRIGHTPICKUPTILTPOSITION = 0.0;
+    public double CLAWLEFTPICKUPTILTPOSITION = 1.0;
 
-    public double CLAWRIGHTDROPOFFTILTPOSITION = 0.25;
-    public double CLAWLEFTDROPOFFTILTPOSITION = 0.85;
+    public double CLAWRIGHTDROPOFFTILTPOSITION = 0.0;
+    public double CLAWLEFTDROPOFFTILTPOSITION = 1.0;
 
     public double ARMFRONTPOSITION = 0.14;
     public double ARMBACKPOSITION = 0.83;
     public double ARMSIDEPOSITION = 0.5;
 
-    public double CLAWCENTERTILT = 0.5;
-    public double CLAWLEFTTILT = 0.72;
-    public double CLAWRIGHTTILT = 0.35;
+    public double CLAWCENTERTILT = 0.35;
+    public double CLAWLEFTTILT = 1.0;
+    public double CLAWRIGHTTILT = 0.0;
 
     public int CONESTACKPOSITION5 = -155;
     public int CONESTACKPOSITION4 = -115;

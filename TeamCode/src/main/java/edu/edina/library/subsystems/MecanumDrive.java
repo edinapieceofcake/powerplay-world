@@ -18,7 +18,7 @@ public class MecanumDrive extends Subsystem{
     private RobotState robotState;
 
     public MecanumDrive(HardwareMap map, RobotState robotState){
-        try {
+        //try {
             drive = new SampleMecanumDrive(map);
             drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             drive.setPoseEstimate(PoseStorage.currentPose);
@@ -26,9 +26,9 @@ public class MecanumDrive extends Subsystem{
             robotState.DriveSpeed = DriveSpeed.Low;
             this.robotState = robotState;
             robotState.DriveSuccessfullySetup = true;
-        } catch (Exception ex) {
-            robotState.DriveSuccessfullySetup = false;
-        }
+        //} catch (Exception ex) {
+           // robotState.DriveSuccessfullySetup = false;
+        // }
     }
 
     @Override

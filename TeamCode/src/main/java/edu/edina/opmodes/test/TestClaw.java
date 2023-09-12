@@ -5,13 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import edu.edina.library.util.RobotState;
 import edu.edina.library.util.Stickygamepad;
 
 @TeleOp
-@Disabled
+//@Disabled
 public class TestClaw extends LinearOpMode {
     private Servo clawServo;
     private Servo armServo;
@@ -27,6 +28,7 @@ public class TestClaw extends LinearOpMode {
         armServo = hardwareMap.get(Servo.class, "armServo");
         clawTiltServo = hardwareMap.get(Servo.class, "clawTiltServo");
         liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
+        liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         liftMotor.setTargetPosition(0);
@@ -60,7 +62,7 @@ public class TestClaw extends LinearOpMode {
             }
 
             if (pad1.b) {
-                liftMotor.setTargetPosition(robotState.AUTOPOLEPOSITIONHIGH);
+                liftMotor.setTargetPosition(robotState.POLEPOSITIONLOW);
             }
 
             if (pad1.y) {
