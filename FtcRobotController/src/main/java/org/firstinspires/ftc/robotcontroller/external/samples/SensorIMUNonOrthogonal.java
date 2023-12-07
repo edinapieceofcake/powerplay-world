@@ -72,7 +72,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
  * Finally, edit this OpMode to use at least one angle around an axis to orient your Hub.
  */
 @TeleOp(name = "Sensor: IMU Non-Orthogonal", group = "Sensor")
-@Disabled     // Comment this out to add to the OpMode list
+//@Disabled     // Comment this out to add to the OpMode list
 public class SensorIMUNonOrthogonal extends LinearOpMode
 {
     // The IMU sensor object
@@ -86,7 +86,7 @@ public class SensorIMUNonOrthogonal extends LinearOpMode
 
         // Retrieve and initialize the IMU.
         // This sample expects the IMU to be in a REV Hub and named "imu".
-        imu = hardwareMap.get(IMU.class, "imu");
+        imu = hardwareMap.get(IMU.class, "externalImu");
 
         /* Define how the hub is mounted to the robot to get the correct Yaw, Pitch and Roll values.
          *

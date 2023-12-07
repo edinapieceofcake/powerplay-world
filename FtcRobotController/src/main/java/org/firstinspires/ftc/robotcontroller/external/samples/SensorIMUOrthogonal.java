@@ -78,11 +78,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
  * to use those parameters.
  */
 @TeleOp(name = "Sensor: IMU Orthogonal", group = "Sensor")
-@Disabled   // Comment this out to add to the OpMode list
+//@Disabled   // Comment this out to add to the OpMode list
 public class SensorIMUOrthogonal extends LinearOpMode
 {
     // The IMU sensor object
     IMU imu;
+    IMU imu1;
+    IMU imu2;
+    IMU imu3;
 
     //----------------------------------------------------------------------------------------------
     // Main logic
@@ -92,7 +95,10 @@ public class SensorIMUOrthogonal extends LinearOpMode
 
         // Retrieve and initialize the IMU.
         // This sample expects the IMU to be in a REV Hub and named "imu".
-        imu = hardwareMap.get(IMU.class, "imu");
+        imu = hardwareMap.get(IMU.class, "externalImu");
+        imu1 = hardwareMap.get(IMU.class, "imu");
+//        imu2 = hardwareMap.get(IMU.class, "imu");
+//        imu3 = hardwareMap.get(IMU.class, "imu");
 
         /* Define how the hub is mounted on the robot to get the correct Yaw, Pitch and Roll values.
          *
@@ -108,7 +114,7 @@ public class SensorIMUOrthogonal extends LinearOpMode
          * To Do:  EDIT these two lines to match YOUR mounting configuration.
          */
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
-        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
 
         RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
@@ -116,10 +122,43 @@ public class SensorIMUOrthogonal extends LinearOpMode
         // Note: if you choose two conflicting directions, this initialization will cause a code exception.
         imu.initialize(new IMU.Parameters(orientationOnRobot));
 
+        RevHubOrientationOnRobot.LogoFacingDirection logoDirection1 = RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
+        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection1  = RevHubOrientationOnRobot.UsbFacingDirection.UP;
+
+        RevHubOrientationOnRobot orientationOnRobot1 = new RevHubOrientationOnRobot(logoDirection1, usbDirection1);
+
+        // Now initialize the IMU with this mounting orientation
+        // Note: if you choose two conflicting directions, this initialization will cause a code exception.
+        imu1.initialize(new IMU.Parameters(orientationOnRobot1));
+//
+//        RevHubOrientationOnRobot.LogoFacingDirection logoDirection2 = RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD;
+//        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection2  = RevHubOrientationOnRobot.UsbFacingDirection.UP;
+//
+//        RevHubOrientationOnRobot orientationOnRobot2 = new RevHubOrientationOnRobot(logoDirection2, usbDirection2);
+//
+//        // Now initialize the IMU with this mounting orientation
+//        // Note: if you choose two conflicting directions, this initialization will cause a code exception.
+//        imu2.initialize(new IMU.Parameters(orientationOnRobot2));
+//
+//        RevHubOrientationOnRobot.LogoFacingDirection logoDirection3 = RevHubOrientationOnRobot.LogoFacingDirection.DOWN;
+//        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection3  = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+//
+//        RevHubOrientationOnRobot orientationOnRobot3 = new RevHubOrientationOnRobot(logoDirection3, usbDirection3);
+//
+//        // Now initialize the IMU with this mounting orientation
+//        // Note: if you choose two conflicting directions, this initialization will cause a code exception.
+//        imu3.initialize(new IMU.Parameters(orientationOnRobot3));
+
+//        imu.resetYaw();
+//        imu1.resetYaw();
+
         // Loop and update the dashboard
         while (!isStopRequested()) {
 
             telemetry.addData("Hub orientation", "Logo=%s   USB=%s\n ", logoDirection, usbDirection);
+            telemetry.addData("Hub orientation1", "Logo=%s   USB=%s\n ", logoDirection1, usbDirection1);
+//            telemetry.addData("Hub orientation2", "Logo=%s   USB=%s\n ", logoDirection2, usbDirection2);
+//            telemetry.addData("Hub orientation3", "Logo=%s   USB=%s\n ", logoDirection3, usbDirection3);
 
             // Check to see if heading reset is requested
             if (gamepad1.y) {
@@ -133,12 +172,19 @@ public class SensorIMUOrthogonal extends LinearOpMode
             YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
             AngularVelocity angularVelocity = imu.getRobotAngularVelocity(AngleUnit.DEGREES);
 
+            YawPitchRollAngles orientation1 = imu1.getRobotYawPitchRollAngles();
+            AngularVelocity angularVelocity1 = imu1.getRobotAngularVelocity(AngleUnit.DEGREES);
+//
+//            YawPitchRollAngles orientation2 = imu2.getRobotYawPitchRollAngles();
+//            AngularVelocity angularVelocity2 = imu2.getRobotAngularVelocity(AngleUnit.DEGREES);
+//
+//            YawPitchRollAngles orientation3 = imu3.getRobotYawPitchRollAngles();
+//            AngularVelocity angularVelocity3 = imu3.getRobotAngularVelocity(AngleUnit.DEGREES);
+
             telemetry.addData("Yaw (Z)", "%.2f Deg. (Heading)", orientation.getYaw(AngleUnit.DEGREES));
-            telemetry.addData("Pitch (X)", "%.2f Deg.", orientation.getPitch(AngleUnit.DEGREES));
-            telemetry.addData("Roll (Y)", "%.2f Deg.\n", orientation.getRoll(AngleUnit.DEGREES));
-            telemetry.addData("Yaw (Z) velocity", "%.2f Deg/Sec", angularVelocity.zRotationRate);
-            telemetry.addData("Pitch (X) velocity", "%.2f Deg/Sec", angularVelocity.xRotationRate);
-            telemetry.addData("Roll (Y) velocity", "%.2f Deg/Sec", angularVelocity.yRotationRate);
+            telemetry.addData("Yaw (Z)", "%.2f Deg. (Heading)", orientation1.getYaw(AngleUnit.DEGREES));
+//            telemetry.addData("Yaw (Z)", "%.2f Deg. (Heading)", orientation2.getYaw(AngleUnit.DEGREES));
+//            telemetry.addData("Yaw (Z)", "%.2f Deg. (Heading)", orientation3.getYaw(AngleUnit.DEGREES));
             telemetry.update();
         }
     }
